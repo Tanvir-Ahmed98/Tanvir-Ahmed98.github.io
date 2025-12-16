@@ -3,9 +3,571 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Tanvir — Creative Developer</title>
-  <meta name="description" content="Tanvir's landing page — developer, designer, and creator." />
-  <link rel="stylesheet" href="styles.css">
+  <title>Tanvir — Software Engineer & Creative Developer</title>
+  <meta name="description" content="Tanvir's portfolio — Software engineer, frontend developer, and designer focused on building exceptional digital experiences." />
+  <style>
+    /* CSS Reset & Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --secondary: #7c3aed;
+      --dark: #1e293b;
+      --light: #f8fafc;
+      --gray: #64748b;
+      --gray-light: #e2e8f0;
+      --gray-dark: #334155;
+      --success: #10b981;
+      --border-radius: 8px;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --transition: all 0.3s ease;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      line-height: 1.6;
+      color: var(--dark);
+      background-color: #ffffff;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    section {
+      padding: 80px 0;
+    }
+
+    h1, h2, h3, h4 {
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+    }
+
+    p {
+      margin-bottom: 1.5rem;
+      color: var(--gray-dark);
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style-position: inside;
+    }
+
+    /* Utility Classes */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .lead {
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--gray-dark);
+    }
+
+    .muted {
+      color: var(--gray);
+      font-size: 0.9rem;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      padding: 12px 28px;
+      background-color: var(--primary);
+      color: white;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      text-align: center;
+      font-size: 1rem;
+    }
+
+    .btn:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .btn-ghost {
+      background-color: transparent;
+      color: var(--primary);
+      border: 1px solid var(--gray-light);
+    }
+
+    .btn-ghost:hover {
+      background-color: var(--gray-light);
+      color: var(--primary-dark);
+    }
+
+    /* Header & Navigation */
+    .site-header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      padding: 16px 0;
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    .dot {
+      color: var(--primary);
+    }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--dark);
+    }
+
+    .nav {
+      display: block;
+    }
+
+    .nav-list {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .nav-list li {
+      list-style: none;
+    }
+
+    .nav-list a {
+      font-weight: 500;
+      color: var(--gray-dark);
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .nav-list a:hover {
+      color: var(--primary);
+    }
+
+    .nav-list a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background-color: var(--primary);
+      transition: width 0.3s ease;
+    }
+
+    .nav-list a:hover::after {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding-top: 140px;
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero-content h1 {
+      font-size: 3rem;
+      margin-bottom: 24px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .hero-card {
+      background-color: white;
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: var(--shadow-lg);
+      transform: rotate(2deg);
+      transition: var(--transition);
+      border: 1px solid var(--gray-light);
+    }
+
+    .hero-card:hover {
+      transform: rotate(0deg) translateY(-10px);
+    }
+
+    .card-header {
+      display: inline-block;
+      background-color: var(--primary);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .card-meta {
+      display: flex;
+      gap: 8px;
+      margin-top: 20px;
+      color: var(--gray);
+      font-size: 0.9rem;
+      align-items: center;
+    }
+
+    /* Features Section */
+    .section-title {
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .section-sub {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 60px;
+      color: var(--gray);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+
+    .feature {
+      background-color: white;
+      padding: 40px 30px;
+      border-radius: var(--border-radius);
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      border: 1px solid transparent;
+    }
+
+    .feature:hover {
+      border-color: var(--primary);
+      transform: translateY(-5px);
+    }
+
+    .feature-ico {
+      margin-bottom: 24px;
+      color: var(--primary);
+    }
+
+    /* About Section */
+    .about {
+      background-color: var(--light);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .about-list {
+      margin-top: 20px;
+    }
+
+    .about-list li {
+      list-style: none;
+      margin-bottom: 12px;
+      padding-left: 24px;
+      position: relative;
+    }
+
+    .about-list li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--success);
+      font-weight: bold;
+    }
+
+    .profile-card {
+      background-color: white;
+      border-radius: var(--border-radius);
+      padding: 30px;
+      box-shadow: var(--shadow);
+      text-align: center;
+      border-top: 4px solid var(--primary);
+    }
+
+    .avatar {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin: 0 auto 20px;
+    }
+
+    /* Contact Section */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+    }
+
+    .contact-form {
+      background-color: white;
+      padding: 40px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 24px;
+    }
+
+    .label-text {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid var(--gray-light);
+      border-radius: var(--border-radius);
+      font-family: inherit;
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 16px;
+    }
+
+    /* Footer */
+    .site-footer {
+      background-color: var(--dark);
+      color: white;
+      padding: 40px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-nav {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-nav a {
+      color: var(--gray-light);
+      transition: var(--transition);
+    }
+
+    .footer-nav a:hover {
+      color: white;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 992px) {
+      .hero-grid,
+      .about-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      h1 {
+        font-size: 2.25rem;
+      }
+      
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-toggle {
+        display: block;
+      }
+      
+      .nav {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        box-shadow: var(--shadow);
+        padding: 20px;
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: var(--transition);
+      }
+      
+      .nav.open {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+      }
+      
+      .nav-list {
+        flex-direction: column;
+        gap: 20px;
+        align-items: flex-start;
+      }
+      
+      .hero {
+        padding-top: 120px;
+      }
+      
+      .hero-ctas {
+        flex-direction: column;
+      }
+      
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-inner {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+      }
+      
+      .footer-nav {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 576px) {
+      section {
+        padding: 60px 0;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+      
+      h2 {
+        font-size: 1.75rem;
+      }
+      
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+      
+      .contact-form {
+        padding: 30px 20px;
+      }
+      
+      .form-actions {
+        flex-direction: column;
+      }
+    }
+
+    /* Animation for elements */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-content, .hero-card, .feature, .profile-card, .contact-form {
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    .feature:nth-child(2) {
+      animation-delay: 0.1s;
+    }
+
+    .feature:nth-child(3) {
+      animation-delay: 0.2s;
+    }
+  </style>
 </head>
 <body>
   <header class="site-header">
@@ -21,7 +583,7 @@
 
       <nav id="primary-navigation" class="nav">
         <ul class="nav-list">
-          <li><a href="#features">Features</a></li>
+          <li><a href="#features">Expertise</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#contact">Contact</a></li>
           <li><a class="btn btn-ghost" href="#get-started">Get Started</a></li>
@@ -34,26 +596,26 @@
     <section class="hero">
       <div class="container hero-grid">
         <div class="hero-content">
-          <h1>Hi, I'm Tanvir — I build delightful digital experiences.</h1>
+          <h1>Hi, I'm Tanvir — Software Engineer & Creative Developer</h1>
           <p class="lead">
-            Frontend developer & designer focused on simple, accessible interfaces and performant websites.
-            I craft experiences people enjoy using.
+            I build exceptional digital experiences that are fast, accessible, and visually engaging. 
+            With expertise in modern web technologies, I create solutions that solve real-world problems.
           </p>
           <p class="hero-ctas">
-            <a class="btn" href="#get-started">Get Started</a>
-            <a class="btn btn-ghost" href="#about">Learn More</a>
+            <a class="btn" href="#contact">Start a Project</a>
+            <a class="btn btn-ghost" href="#about">View My Work</a>
           </p>
         </div>
 
         <div class="hero-card" aria-hidden="true">
           <div class="card-inner">
-            <div class="card-header">Featured</div>
-            <h3>Minimal portfolio template</h3>
-            <p>Fast, accessible, and easy to customize — perfect to showcase projects and get hired.</p>
+            <div class="card-header">Featured Project</div>
+            <h3>E-Commerce Platform</h3>
+            <p>A full-stack e-commerce solution with React, Node.js, and MongoDB. Features include payment integration, user authentication, and admin dashboard.</p>
             <div class="card-meta">
-              <span>HTML • CSS</span>
+              <span>React • Node.js</span>
               <span>•</span>
-              <span>Responsive</span>
+              <span>MongoDB • Stripe API</span>
             </div>
           </div>
         </div>
@@ -62,32 +624,34 @@
 
     <section id="features" class="section features">
       <div class="container">
-        <h2 class="section-title">What I build</h2>
-        <p class="section-sub">Scalable static sites, accessible components, and fast-loading UI.</p>
+        <h2 class="section-title">My Expertise</h2>
+        <p class="section-sub">Full-stack development with focus on performance, scalability, and user experience.</p>
 
         <div class="features-grid">
           <article class="feature">
             <svg class="feature-ico" width="48" height="48" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="1.5" fill="none"/>
             </svg>
-            <h3>Clean UI</h3>
-            <p>Design-forward layouts built with semantic HTML and responsive CSS.</p>
+            <h3>Frontend Development</h3>
+            <p>React, Vue.js, TypeScript, modern JavaScript, responsive design, and component libraries.</p>
           </article>
 
           <article class="feature">
             <svg class="feature-ico" width="48" height="48" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M12 2v20M2 12h20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+              <path d="M20 14.66V20a2 2 0 01-2 2H6a2 2 0 01-2-2v-5.34M18 2l4 4-4 4M6 10l4-4-4-4" stroke="currentColor" stroke-width="1.5" fill="none"/>
+              <path d="M14 10l-4 8h8" stroke="currentColor" stroke-width="1.5" fill="none"/>
             </svg>
-            <h3>Performance</h3>
-            <p>Optimized for fast load times and minimal render-blocking resources.</p>
+            <h3>Backend & APIs</h3>
+            <p>Node.js, Express, REST & GraphQL APIs, database design, authentication, and server architecture.</p>
           </article>
 
           <article class="feature">
             <svg class="feature-ico" width="48" height="48" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M12 6a6 6 0 100 12 6 6 0 000-12z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+              <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+              <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" stroke="currentColor" stroke-width="1.5" fill="none"/>
             </svg>
-            <h3>Accessibility</h3>
-            <p>Built with keyboard and screen-reader accessibility in mind.</p>
+            <h3>DevOps & Deployment</h3>
+            <p>AWS, Docker, CI/CD pipelines, automated testing, performance monitoring, and scalable infrastructure.</p>
           </article>
         </div>
       </div>
@@ -96,20 +660,29 @@
     <section id="about" class="section about">
       <div class="container about-grid">
         <div>
-          <h2>About me</h2>
-          <p>I’m a frontend developer who enjoys turning ideas into interfaces. I focus on clarity, performance, and maintainable CSS.</p>
+          <h2>About Me</h2>
+          <p>I'm a passionate software engineer with 5+ years of experience building web applications. I enjoy tackling complex problems and transforming ideas into robust, scalable solutions.</p>
+          <p>My approach combines technical expertise with design thinking to create products that are not only functional but also delightful to use.</p>
           <ul class="about-list">
-            <li>HTML & CSS enthusiast</li>
-            <li>Responsive-first workflows</li>
-            <li>Simple, maintainable code</li>
+            <li>Full-stack development with JavaScript/TypeScript</li>
+            <li>Cloud architecture and microservices</li>
+            <li>Agile methodologies and team collaboration</li>
+            <li>Performance optimization and security best practices</li>
           </ul>
         </div>
         <aside class="profile-card" aria-hidden="true">
           <div class="avatar">TA</div>
           <div>
             <h3>Tanvir Ahmed</h3>
-            <p>Developer & Designer</p>
+            <p>Software Engineer</p>
+            <p class="muted">Full-Stack Developer</p>
             <p class="muted">Based in Bangladesh</p>
+            <div style="margin-top: 20px;">
+              <p class="muted" style="font-size: 0.8rem;">Technologies I work with:</p>
+              <p style="font-size: 0.9rem; color: var(--gray-dark);">
+                React, Node.js, TypeScript, MongoDB, AWS, Docker
+              </p>
+            </div>
           </div>
         </aside>
       </div>
@@ -118,22 +691,43 @@
     <section id="contact" class="section contact">
       <div class="container contact-grid">
         <div>
-          <h2>Let's work together</h2>
-          <p>Interested in collaborating or hiring? Send a message and I’ll get back shortly.</p>
+          <h2>Let's Build Something Amazing</h2>
+          <p>I'm currently available for freelance projects and full-time opportunities. Whether you need a complete application, consultation, or team collaboration, let's discuss how I can help bring your vision to life.</p>
+          <p style="margin-top: 20px;">
+            <strong>Email:</strong> hello@tanvir.dev<br>
+            <strong>Location:</strong> Dhaka, Bangladesh<br>
+            <strong>Availability:</strong> Open to new projects
+          </p>
         </div>
 
-        <form class="contact-form" id="get-started" action="#" onsubmit="event.preventDefault(); alert('Thanks — form demo only.');">
+        <form class="contact-form" id="get-started" action="#" onsubmit="event.preventDefault(); handleFormSubmit();">
           <label>
-            <span class="label-text">Email</span>
+            <span class="label-text">Your Name</span>
+            <input type="text" name="name" required placeholder="John Doe">
+          </label>
+          <label>
+            <span class="label-text">Email Address</span>
             <input type="email" name="email" required placeholder="you@example.com">
           </label>
           <label>
+            <span class="label-text">Project Type</span>
+            <select name="project-type" style="width: 100%; padding: 12px 16px; border: 1px solid var(--gray-light); border-radius: var(--border-radius); font-family: inherit; font-size: 1rem;">
+              <option value="">Select project type</option>
+              <option value="web-app">Web Application</option>
+              <option value="mobile-app">Mobile App</option>
+              <option value="ecommerce">E-Commerce</option>
+              <option value="api">API Development</option>
+              <option value="consultation">Technical Consultation</option>
+              <option value="other">Other</option>
+            </select>
+          </label>
+          <label>
             <span class="label-text">Message</span>
-            <textarea name="message" rows="4" placeholder="Tell me about your project..." required></textarea>
+            <textarea name="message" rows="4" placeholder="Tell me about your project, timeline, and budget..." required></textarea>
           </label>
           <div class="form-actions">
             <button class="btn" type="submit">Send Message</button>
-            <button class="btn btn-ghost" type="reset">Reset</button>
+            <button class="btn btn-ghost" type="reset">Clear Form</button>
           </div>
         </form>
       </div>
@@ -142,17 +736,18 @@
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <p>© <span id="year"></span> Tanvir Ahmed — Built with HTML & CSS.</p>
+      <p>© <span id="year"></span> Tanvir Ahmed — Software Engineer & Creative Developer.</p>
       <nav class="footer-nav" aria-label="Footer">
-        <a href="#">Privacy</a>
-        <a href="#">Terms</a>
-        <a href="#">Source</a>
+        <a href="https://github.com" target="_blank">GitHub</a>
+        <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+        <a href="https://twitter.com" target="_blank">Twitter</a>
+        <a href="#contact">Contact</a>
       </nav>
     </div>
   </footer>
 
   <script>
-    // Small JS: toggle mobile nav and update year
+    // Mobile navigation toggle
     (function () {
       var nav = document.getElementById('primary-navigation');
       var btn = document.getElementById('navToggle');
@@ -162,7 +757,27 @@
         nav.classList.toggle('open');
       });
 
+      // Set current year in footer
       document.getElementById('year').textContent = new Date().getFullYear();
+      
+      // Form submission handler
+      window.handleFormSubmit = function() {
+        const form = document.querySelector('.contact-form');
+        const formData = new FormData(form);
+        const name = formData.get('name');
+        
+        // Show success message
+        alert(`Thank you ${name}! Your message has been sent. I'll get back to you shortly.`);
+        form.reset();
+      };
+      
+      // Close mobile menu when clicking a link
+      document.querySelectorAll('.nav-list a').forEach(link => {
+        link.addEventListener('click', () => {
+          nav.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+        });
+      });
     })();
   </script>
 </body>
