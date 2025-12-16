@@ -1,1 +1,169 @@
-<p>Hello This is Tanvir</p>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tanvir — Creative Developer</title>
+  <meta name="description" content="Tanvir's landing page — developer, designer, and creator." />
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#">Tanvir<span class="dot">.</span></a>
+
+      <button class="nav-toggle" aria-expanded="false" aria-controls="primary-navigation" id="navToggle">
+        <span class="sr-only">Toggle navigation</span>
+        <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+
+      <nav id="primary-navigation" class="nav">
+        <ul class="nav-list">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a class="btn btn-ghost" href="#get-started">Get Started</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <h1>Hi, I'm Tanvir — I build delightful digital experiences.</h1>
+          <p class="lead">
+            Frontend developer & designer focused on simple, accessible interfaces and performant websites.
+            I craft experiences people enjoy using.
+          </p>
+          <p class="hero-ctas">
+            <a class="btn" href="#get-started">Get Started</a>
+            <a class="btn btn-ghost" href="#about">Learn More</a>
+          </p>
+        </div>
+
+        <div class="hero-card" aria-hidden="true">
+          <div class="card-inner">
+            <div class="card-header">Featured</div>
+            <h3>Minimal portfolio template</h3>
+            <p>Fast, accessible, and easy to customize — perfect to showcase projects and get hired.</p>
+            <div class="card-meta">
+              <span>HTML • CSS</span>
+              <span>•</span>
+              <span>Responsive</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="section features">
+      <div class="container">
+        <h2 class="section-title">What I build</h2>
+        <p class="section-sub">Scalable static sites, accessible components, and fast-loading UI.</p>
+
+        <div class="features-grid">
+          <article class="feature">
+            <svg class="feature-ico" width="48" height="48" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            </svg>
+            <h3>Clean UI</h3>
+            <p>Design-forward layouts built with semantic HTML and responsive CSS.</p>
+          </article>
+
+          <article class="feature">
+            <svg class="feature-ico" width="48" height="48" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 2v20M2 12h20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            </svg>
+            <h3>Performance</h3>
+            <p>Optimized for fast load times and minimal render-blocking resources.</p>
+          </article>
+
+          <article class="feature">
+            <svg class="feature-ico" width="48" height="48" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 6a6 6 0 100 12 6 6 0 000-12z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+            </svg>
+            <h3>Accessibility</h3>
+            <p>Built with keyboard and screen-reader accessibility in mind.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section about">
+      <div class="container about-grid">
+        <div>
+          <h2>About me</h2>
+          <p>I’m a frontend developer who enjoys turning ideas into interfaces. I focus on clarity, performance, and maintainable CSS.</p>
+          <ul class="about-list">
+            <li>HTML & CSS enthusiast</li>
+            <li>Responsive-first workflows</li>
+            <li>Simple, maintainable code</li>
+          </ul>
+        </div>
+        <aside class="profile-card" aria-hidden="true">
+          <div class="avatar">TA</div>
+          <div>
+            <h3>Tanvir Ahmed</h3>
+            <p>Developer & Designer</p>
+            <p class="muted">Based in Bangladesh</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact">
+      <div class="container contact-grid">
+        <div>
+          <h2>Let's work together</h2>
+          <p>Interested in collaborating or hiring? Send a message and I’ll get back shortly.</p>
+        </div>
+
+        <form class="contact-form" id="get-started" action="#" onsubmit="event.preventDefault(); alert('Thanks — form demo only.');">
+          <label>
+            <span class="label-text">Email</span>
+            <input type="email" name="email" required placeholder="you@example.com">
+          </label>
+          <label>
+            <span class="label-text">Message</span>
+            <textarea name="message" rows="4" placeholder="Tell me about your project..." required></textarea>
+          </label>
+          <div class="form-actions">
+            <button class="btn" type="submit">Send Message</button>
+            <button class="btn btn-ghost" type="reset">Reset</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> Tanvir Ahmed — Built with HTML & CSS.</p>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Source</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    // Small JS: toggle mobile nav and update year
+    (function () {
+      var nav = document.getElementById('primary-navigation');
+      var btn = document.getElementById('navToggle');
+      btn.addEventListener('click', function () {
+        var expanded = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', String(!expanded));
+        nav.classList.toggle('open');
+      });
+
+      document.getElementById('year').textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>
