@@ -3,572 +3,355 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Tanvir — Software Engineer & Creative Developer</title>
-  <meta name="description" content="Tanvir's portfolio — Software engineer, frontend developer, and designer focused on building exceptional digital experiences." />
+  <title>Tanvir — Front-End Developer</title>
+  <meta name="description" content="Tanvir's portfolio — Front-end developer focused on building fast, accessible, and visually engaging web experiences." />
+
   <style>
     /* CSS Reset & Base Styles */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root{
+      --primary:#2563eb;
+      --primary-dark:#1d4ed8;
+      --secondary:#7c3aed;
+      --dark:#1e293b;
+      --light:#f8fafc;
+      --gray:#64748b;
+      --gray-light:#e2e8f0;
+      --gray-dark:#334155;
+      --success:#10b981;
+      --border-radius:8px;
+      --shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -1px rgba(0,0,0,.06);
+      --shadow-lg:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -2px rgba(0,0,0,.05);
+      --transition:all .3s ease;
     }
 
-    :root {
-      --primary: #2563eb;
-      --primary-dark: #1d4ed8;
-      --secondary: #7c3aed;
-      --dark: #1e293b;
-      --light: #f8fafc;
-      --gray: #64748b;
-      --gray-light: #e2e8f0;
-      --gray-dark: #334155;
-      --success: #10b981;
-      --border-radius: 8px;
-      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-      --transition: all 0.3s ease;
+    html{ scroll-behavior:smooth; }
+
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,'Open Sans','Helvetica Neue',sans-serif;
+      line-height:1.6;
+      color:var(--dark);
+      background:#fff;
+      overflow-x:hidden;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    .container{ width:100%; max-width:1200px; margin:0 auto; padding:0 20px; }
+    section{ padding:80px 0; }
+    h1,h2,h3,h4{ font-weight:700; line-height:1.2; margin-bottom:1rem; }
+    h1{ font-size:2.5rem; }
+    h2{ font-size:2rem; }
+    h3{ font-size:1.5rem; }
+    p{ margin-bottom:1.5rem; color:var(--gray-dark); }
+    a{ text-decoration:none; color:inherit; }
+    ul{ list-style-position:inside; }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      line-height: 1.6;
-      color: var(--dark);
-      background-color: #ffffff;
-      overflow-x: hidden;
+    /* Utility */
+    .sr-only{
+      position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+      overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
     }
-
-    .container {
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    section {
-      padding: 80px 0;
-    }
-
-    h1, h2, h3, h4 {
-      font-weight: 700;
-      line-height: 1.2;
-      margin-bottom: 1rem;
-    }
-
-    h1 {
-      font-size: 2.5rem;
-    }
-
-    h2 {
-      font-size: 2rem;
-    }
-
-    h3 {
-      font-size: 1.5rem;
-    }
-
-    p {
-      margin-bottom: 1.5rem;
-      color: var(--gray-dark);
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    ul {
-      list-style-position: inside;
-    }
-
-    /* Utility Classes */
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
-    }
-
-    .lead {
-      font-size: 1.25rem;
-      font-weight: 400;
-      color: var(--gray-dark);
-    }
-
-    .muted {
-      color: var(--gray);
-      font-size: 0.9rem;
-    }
+    .lead{ font-size:1.25rem; font-weight:400; color:var(--gray-dark); }
+    .muted{ color:var(--gray); font-size:.9rem; }
 
     /* Buttons */
-    .btn {
-      display: inline-block;
-      padding: 12px 28px;
-      background-color: var(--primary);
-      color: white;
-      border-radius: var(--border-radius);
-      font-weight: 600;
-      border: none;
-      cursor: pointer;
-      transition: var(--transition);
-      text-align: center;
-      font-size: 1rem;
+    .btn{
+      display:inline-block;
+      padding:12px 28px;
+      background:var(--primary);
+      color:#fff;
+      border-radius:var(--border-radius);
+      font-weight:600;
+      border:none;
+      cursor:pointer;
+      transition:var(--transition);
+      text-align:center;
+      font-size:1rem;
+    }
+    .btn:hover{ background:var(--primary-dark); transform:translateY(-2px); box-shadow:var(--shadow); }
+    .btn-ghost{
+      background:transparent;
+      color:var(--primary);
+      border:1px solid var(--gray-light);
+    }
+    .btn-ghost:hover{ background:var(--gray-light); color:var(--primary-dark); }
+
+    /* Header */
+    .site-header{
+      position:fixed; top:0; width:100%;
+      background:rgba(255,255,255,.95);
+      backdrop-filter:blur(10px);
+      z-index:1000;
+      box-shadow:0 1px 3px rgba(0,0,0,.05);
+      padding:16px 0;
+    }
+    .header-inner{ display:flex; justify-content:space-between; align-items:center; }
+    .brand{ font-size:1.75rem; font-weight:700; color:var(--dark); }
+    .dot{ color:var(--primary); }
+
+    .nav-toggle{ display:none; background:none; border:none; cursor:pointer; color:var(--dark); }
+    .nav{ display:block; }
+    .nav-list{ display:flex; gap:32px; align-items:center; }
+    .nav-list li{ list-style:none; }
+    .nav-list a{
+      font-weight:500;
+      color:var(--gray-dark);
+      transition:var(--transition);
+      position:relative;
+    }
+    .nav-list a:hover{ color:var(--primary); }
+    .nav-list a::after{
+      content:'';
+      position:absolute; width:0; height:2px;
+      bottom:-5px; left:0;
+      background:var(--primary);
+      transition:width .3s ease;
+    }
+    .nav-list a:hover::after{ width:100%; }
+
+    /* Hero */
+    .hero{
+      padding-top:140px;
+      background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);
+      overflow:hidden;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:60px;
+      align-items:center;
+    }
+    .hero-content h1{ font-size:3rem; margin-bottom:24px; }
+    .hero-ctas{ display:flex; gap:16px; margin-top:32px; flex-wrap:wrap; }
+
+    .hero-card{
+      background:#fff;
+      border-radius:16px;
+      padding:32px;
+      box-shadow:var(--shadow-lg);
+      transform:rotate(2deg);
+      transition:var(--transition);
+      border:1px solid var(--gray-light);
+    }
+    .hero-card:hover{ transform:rotate(0deg) translateY(-10px); }
+    .card-header{
+      display:inline-block;
+      background:var(--primary);
+      color:#fff;
+      padding:6px 12px;
+      border-radius:20px;
+      font-size:.75rem;
+      font-weight:600;
+      margin-bottom:20px;
+    }
+    .card-meta{
+      display:flex; gap:8px; margin-top:20px;
+      color:var(--gray); font-size:.9rem; align-items:center; flex-wrap:wrap;
     }
 
-    .btn:hover {
-      background-color: var(--primary-dark);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow);
+    /* Sections */
+    .section-title{ text-align:center; margin-bottom:16px; }
+    .section-sub{
+      text-align:center;
+      max-width:760px;
+      margin:0 auto 60px;
+      color:var(--gray);
     }
 
-    .btn-ghost {
-      background-color: transparent;
-      color: var(--primary);
-      border: 1px solid var(--gray-light);
+    /* Features */
+    .features-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:40px;
+    }
+    .feature{
+      background:#fff;
+      padding:40px 30px;
+      border-radius:var(--border-radius);
+      text-align:center;
+      box-shadow:var(--shadow);
+      transition:var(--transition);
+      border:1px solid transparent;
+    }
+    .feature:hover{ border-color:var(--primary); transform:translateY(-5px); }
+    .feature-ico{ margin-bottom:24px; color:var(--primary); }
+
+    /* Projects */
+    .projects{ background:#fff; }
+    .projects-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:28px;
+    }
+    .project-card{
+      background:#fff;
+      border:1px solid var(--gray-light);
+      border-radius:14px;
+      padding:24px;
+      box-shadow:var(--shadow);
+      transition:var(--transition);
+      height:100%;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .project-card:hover{ transform:translateY(-6px); border-color:rgba(37,99,235,.35); }
+    .pill-row{ display:flex; gap:8px; flex-wrap:wrap; margin-top:auto; padding-top:8px; }
+    .pill{
+      font-size:.78rem;
+      padding:6px 10px;
+      border-radius:999px;
+      background:var(--light);
+      border:1px solid var(--gray-light);
+      color:var(--gray-dark);
+      white-space:nowrap;
+    }
+    .project-title{ margin-bottom:.25rem; }
+    .project-sub{ color:var(--gray); font-size:.92rem; margin-bottom:0; }
+
+    /* About */
+    .about{ background:var(--light); }
+    .about-grid{
+      display:grid;
+      grid-template-columns:2fr 1fr;
+      gap:60px;
+      align-items:start;
+    }
+    .about-list{ margin-top:20px; }
+    .about-list li{
+      list-style:none;
+      margin-bottom:12px;
+      padding-left:24px;
+      position:relative;
+    }
+    .about-list li::before{
+      content:'✓';
+      position:absolute;
+      left:0;
+      color:var(--success);
+      font-weight:bold;
     }
 
-    .btn-ghost:hover {
-      background-color: var(--gray-light);
-      color: var(--primary-dark);
+    .profile-card{
+      background:#fff;
+      border-radius:var(--border-radius);
+      padding:30px;
+      box-shadow:var(--shadow);
+      text-align:center;
+      border-top:4px solid var(--primary);
     }
 
-    /* Header & Navigation */
-    .site-header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background-color: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      z-index: 1000;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-      padding: 16px 0;
+    /* Profile image */
+    .profile-img{
+      width:110px;
+      height:110px;
+      border-radius:50%;
+      object-fit:cover;
+      display:block;
+      margin:0 auto 18px;
+      border:3px solid var(--gray-light);
+      box-shadow:var(--shadow);
+      background:linear-gradient(135deg,var(--primary),var(--secondary));
     }
 
-    .header-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    /* Contact */
+    .contact-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:60px;
     }
+    .contact-form{
+      background:#fff;
+      padding:40px;
+      border-radius:var(--border-radius);
+      box-shadow:var(--shadow);
+    }
+    label{ display:block; margin-bottom:24px; }
+    .label-text{ display:block; margin-bottom:8px; font-weight:600; color:var(--dark); }
 
-    .brand {
-      font-size: 1.75rem;
-      font-weight: 700;
-      color: var(--dark);
+    input,textarea,select{
+      width:100%;
+      padding:12px 16px;
+      border:1px solid var(--gray-light);
+      border-radius:var(--border-radius);
+      font-family:inherit;
+      font-size:1rem;
+      transition:var(--transition);
+      background:#fff;
     }
-
-    .dot {
-      color: var(--primary);
+    input:focus,textarea:focus,select:focus{
+      outline:none;
+      border-color:var(--primary);
+      box-shadow:0 0 0 3px rgba(37,99,235,.1);
     }
-
-    .nav-toggle {
-      display: none;
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: var(--dark);
-    }
-
-    .nav {
-      display: block;
-    }
-
-    .nav-list {
-      display: flex;
-      gap: 32px;
-      align-items: center;
-    }
-
-    .nav-list li {
-      list-style: none;
-    }
-
-    .nav-list a {
-      font-weight: 500;
-      color: var(--gray-dark);
-      transition: var(--transition);
-      position: relative;
-    }
-
-    .nav-list a:hover {
-      color: var(--primary);
-    }
-
-    .nav-list a::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: -5px;
-      left: 0;
-      background-color: var(--primary);
-      transition: width 0.3s ease;
-    }
-
-    .nav-list a:hover::after {
-      width: 100%;
-    }
-
-    /* Hero Section */
-    .hero {
-      padding-top: 140px;
-      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-      overflow: hidden;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-    }
-
-    .hero-content h1 {
-      font-size: 3rem;
-      margin-bottom: 24px;
-    }
-
-    .hero-ctas {
-      display: flex;
-      gap: 16px;
-      margin-top: 32px;
-    }
-
-    .hero-card {
-      background-color: white;
-      border-radius: 16px;
-      padding: 32px;
-      box-shadow: var(--shadow-lg);
-      transform: rotate(2deg);
-      transition: var(--transition);
-      border: 1px solid var(--gray-light);
-    }
-
-    .hero-card:hover {
-      transform: rotate(0deg) translateY(-10px);
-    }
-
-    .card-header {
-      display: inline-block;
-      background-color: var(--primary);
-      color: white;
-      padding: 6px 12px;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      margin-bottom: 20px;
-    }
-
-    .card-meta {
-      display: flex;
-      gap: 8px;
-      margin-top: 20px;
-      color: var(--gray);
-      font-size: 0.9rem;
-      align-items: center;
-    }
-
-    /* Features Section */
-    .section-title {
-      text-align: center;
-      margin-bottom: 16px;
-    }
-
-    .section-sub {
-      text-align: center;
-      max-width: 700px;
-      margin: 0 auto 60px;
-      color: var(--gray);
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 40px;
-    }
-
-    .feature {
-      background-color: white;
-      padding: 40px 30px;
-      border-radius: var(--border-radius);
-      text-align: center;
-      box-shadow: var(--shadow);
-      transition: var(--transition);
-      border: 1px solid transparent;
-    }
-
-    .feature:hover {
-      border-color: var(--primary);
-      transform: translateY(-5px);
-    }
-
-    .feature-ico {
-      margin-bottom: 24px;
-      color: var(--primary);
-    }
-
-    /* About Section */
-    .about {
-      background-color: var(--light);
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 60px;
-      align-items: start;
-    }
-
-    .about-list {
-      margin-top: 20px;
-    }
-
-    .about-list li {
-      list-style: none;
-      margin-bottom: 12px;
-      padding-left: 24px;
-      position: relative;
-    }
-
-    .about-list li::before {
-      content: '✓';
-      position: absolute;
-      left: 0;
-      color: var(--success);
-      font-weight: bold;
-    }
-
-    .profile-card {
-      background-color: white;
-      border-radius: var(--border-radius);
-      padding: 30px;
-      box-shadow: var(--shadow);
-      text-align: center;
-      border-top: 4px solid var(--primary);
-    }
-
-    .avatar {
-      width: 80px;
-      height: 80px;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 1.75rem;
-      font-weight: 700;
-      margin: 0 auto 20px;
-    }
-
-    /* Contact Section */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-    }
-
-    .contact-form {
-      background-color: white;
-      padding: 40px;
-      border-radius: var(--border-radius);
-      box-shadow: var(--shadow);
-    }
-
-    label {
-      display: block;
-      margin-bottom: 24px;
-    }
-
-    .label-text {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 600;
-      color: var(--dark);
-    }
-
-    input, textarea {
-      width: 100%;
-      padding: 12px 16px;
-      border: 1px solid var(--gray-light);
-      border-radius: var(--border-radius);
-      font-family: inherit;
-      font-size: 1rem;
-      transition: var(--transition);
-    }
-
-    input:focus, textarea:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-    }
-
-    .form-actions {
-      display: flex;
-      gap: 16px;
-    }
+    .form-actions{ display:flex; gap:16px; flex-wrap:wrap; }
 
     /* Footer */
-    .site-footer {
-      background-color: var(--dark);
-      color: white;
-      padding: 40px 0;
+    .site-footer{
+      background:var(--dark);
+      color:#fff;
+      padding:40px 0;
+    }
+    .footer-inner{ display:flex; justify-content:space-between; align-items:center; gap:18px; }
+    .footer-nav{ display:flex; gap:24px; flex-wrap:wrap; }
+    .footer-nav a{ color:var(--gray-light); transition:var(--transition); }
+    .footer-nav a:hover{ color:#fff; }
+
+    /* Responsive */
+    @media (max-width: 992px){
+      .hero-grid,.about-grid,.contact-grid{ grid-template-columns:1fr; gap:40px; }
+      .features-grid{ grid-template-columns:repeat(2,1fr); }
+      .projects-grid{ grid-template-columns:repeat(2,1fr); }
+      h1{ font-size:2.25rem; }
+      .hero-content h1{ font-size:2.5rem; }
+    }
+    @media (max-width: 768px){
+      .nav-toggle{ display:block; }
+      .nav{
+        position:fixed;
+        top:70px; left:0;
+        width:100%;
+        background:#fff;
+        box-shadow:var(--shadow);
+        padding:20px;
+        transform:translateY(-100%);
+        opacity:0;
+        visibility:hidden;
+        transition:var(--transition);
+      }
+      .nav.open{ transform:translateY(0); opacity:1; visibility:visible; }
+      .nav-list{ flex-direction:column; gap:20px; align-items:flex-start; }
+      .hero{ padding-top:120px; }
+      .hero-ctas{ flex-direction:column; }
+      .features-grid{ grid-template-columns:1fr; }
+      .projects-grid{ grid-template-columns:1fr; }
+      .footer-inner{ flex-direction:column; text-align:center; }
+      .footer-nav{ justify-content:center; }
+    }
+    @media (max-width: 576px){
+      section{ padding:60px 0; }
+      h1{ font-size:2rem; }
+      h2{ font-size:1.75rem; }
+      .hero-content h1{ font-size:2rem; }
+      .contact-form{ padding:30px 20px; }
+      .form-actions{ flex-direction:column; }
     }
 
-    .footer-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    /* Animations */
+    @keyframes fadeIn{
+      from{ opacity:0; transform:translateY(20px); }
+      to{ opacity:1; transform:translateY(0); }
     }
-
-    .footer-nav {
-      display: flex;
-      gap: 24px;
-    }
-
-    .footer-nav a {
-      color: var(--gray-light);
-      transition: var(--transition);
-    }
-
-    .footer-nav a:hover {
-      color: white;
-    }
-
-    /* Responsive Styles */
-    @media (max-width: 992px) {
-      .hero-grid,
-      .about-grid,
-      .contact-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-      
-      .features-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      
-      h1 {
-        font-size: 2.25rem;
-      }
-      
-      .hero-content h1 {
-        font-size: 2.5rem;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .nav-toggle {
-        display: block;
-      }
-      
-      .nav {
-        position: fixed;
-        top: 70px;
-        left: 0;
-        width: 100%;
-        background-color: white;
-        box-shadow: var(--shadow);
-        padding: 20px;
-        transform: translateY(-100%);
-        opacity: 0;
-        visibility: hidden;
-        transition: var(--transition);
-      }
-      
-      .nav.open {
-        transform: translateY(0);
-        opacity: 1;
-        visibility: visible;
-      }
-      
-      .nav-list {
-        flex-direction: column;
-        gap: 20px;
-        align-items: flex-start;
-      }
-      
-      .hero {
-        padding-top: 120px;
-      }
-      
-      .hero-ctas {
-        flex-direction: column;
-      }
-      
-      .features-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .footer-inner {
-        flex-direction: column;
-        gap: 20px;
-        text-align: center;
-      }
-      
-      .footer-nav {
-        justify-content: center;
-      }
-    }
-
-    @media (max-width: 576px) {
-      section {
-        padding: 60px 0;
-      }
-      
-      h1 {
-        font-size: 2rem;
-      }
-      
-      h2 {
-        font-size: 1.75rem;
-      }
-      
-      .hero-content h1 {
-        font-size: 2rem;
-      }
-      
-      .contact-form {
-        padding: 30px 20px;
-      }
-      
-      .form-actions {
-        flex-direction: column;
-      }
-    }
-
-    /* Animation for elements */
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .hero-content, .hero-card, .feature, .profile-card, .contact-form {
-      animation: fadeIn 0.8s ease-out;
-    }
-
-    .feature:nth-child(2) {
-      animation-delay: 0.1s;
-    }
-
-    .feature:nth-child(3) {
-      animation-delay: 0.2s;
-    }
+    .hero-content,.hero-card,.feature,.project-card,.profile-card,.contact-form{ animation:fadeIn .8s ease-out; }
+    .feature:nth-child(2){ animation-delay:.1s; }
+    .feature:nth-child(3){ animation-delay:.2s; }
+    .project-card:nth-child(2){ animation-delay:.05s; }
+    .project-card:nth-child(3){ animation-delay:.1s; }
+    .project-card:nth-child(4){ animation-delay:.15s; }
+    .project-card:nth-child(5){ animation-delay:.2s; }
   </style>
 </head>
+
 <body>
   <header class="site-header">
     <div class="container header-inner">
@@ -584,6 +367,7 @@
       <nav id="primary-navigation" class="nav">
         <ul class="nav-list">
           <li><a href="#features">Expertise</a></li>
+          <li><a href="#projects">Projects</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#contact">Contact</a></li>
           <li><a class="btn btn-ghost" href="#get-started">Get Started</a></li>
@@ -593,39 +377,47 @@
   </header>
 
   <main>
+    <!-- HERO -->
     <section class="hero">
       <div class="container hero-grid">
         <div class="hero-content">
-          <h1>Hi, I'm Tanvir — Software Engineer & Creative Developer</h1>
+          <h1>Hi, I'm Tanvir — Front-End Developer</h1>
           <p class="lead">
-            I build exceptional digital experiences that are fast, accessible, and visually engaging. 
-            With expertise in modern web technologies, I create solutions that solve real-world problems.
+            I build responsive, user-friendly web applications with React and Vue, focusing on performance, clean UI,
+            and real-world business solutions. I enjoy building reusable components, integrating APIs, and delivering smooth user experiences.
           </p>
           <p class="hero-ctas">
             <a class="btn" href="#contact">Start a Project</a>
-            <a class="btn btn-ghost" href="#about">View My Work</a>
+            <a class="btn btn-ghost" href="#projects">View Projects</a>
           </p>
         </div>
 
+        <!-- Featured Project -->
         <div class="hero-card" aria-hidden="true">
           <div class="card-inner">
             <div class="card-header">Featured Project</div>
-            <h3>E-Commerce Platform</h3>
-            <p>A full-stack e-commerce solution with React, Node.js, and MongoDB. Features include payment integration, user authentication, and admin dashboard.</p>
+            <h3>Vehicle Tracking System (VTS)</h3>
+            <p>
+              A real-time vehicle tracking platform integrated with IoT devices. Built live tracking features using WebSocket communication,
+              created daily/monthly reports, and ensured uptime by monitoring error logs and high-volume database transactions.
+            </p>
             <div class="card-meta">
-              <span>React • Node.js</span>
+              <span>WebSocket • IoT</span>
               <span>•</span>
-              <span>MongoDB • Stripe API</span>
+              <span>MySQL/PostgreSQL • Reporting</span>
             </div>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- EXPERTISE -->
     <section id="features" class="section features">
       <div class="container">
         <h2 class="section-title">My Expertise</h2>
-        <p class="section-sub">Full-stack development with focus on performance, scalability, and user experience.</p>
+        <p class="section-sub">
+          Front-end focused development with strong API integration, reusable components, and production-ready reporting modules.
+        </p>
 
         <div class="features-grid">
           <article class="feature">
@@ -633,7 +425,10 @@
               <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="1.5" fill="none"/>
             </svg>
             <h3>Frontend Development</h3>
-            <p>React, Vue.js, TypeScript, modern JavaScript, responsive design, and component libraries.</p>
+            <p>
+              React (Redux/Redux Toolkit), Vue (Pinia), PrimeReact/PrimeVue, reusable custom components,
+              responsive UI, accessibility, and performance optimization.
+            </p>
           </article>
 
           <article class="feature">
@@ -642,7 +437,10 @@
               <path d="M14 10l-4 8h8" stroke="currentColor" stroke-width="1.5" fill="none"/>
             </svg>
             <h3>Backend & APIs</h3>
-            <p>Node.js, Express, REST & GraphQL APIs, database design, authentication, and server architecture.</p>
+            <p>
+              Laravel (PHP), REST API integration, Stripe payments, Pataho courier API integration,
+              authentication flows, and scalable modules for business applications.
+            </p>
           </article>
 
           <article class="feature">
@@ -650,37 +448,140 @@
               <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" stroke="currentColor" stroke-width="1.5" fill="none"/>
               <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" stroke="currentColor" stroke-width="1.5" fill="none"/>
             </svg>
-            <h3>DevOps & Deployment</h3>
-            <p>AWS, Docker, CI/CD pipelines, automated testing, performance monitoring, and scalable infrastructure.</p>
+            <h3>Reliability & Reporting</h3>
+            <p>
+              Debugging and log monitoring, database transaction awareness, building daily/monthly/custom reports,
+              and ensuring smooth uptime in production systems.
+            </p>
           </article>
         </div>
       </div>
     </section>
 
+    <!-- PROJECTS -->
+    <section id="projects" class="section projects">
+      <div class="container">
+        <h2 class="section-title">Projects</h2>
+        <p class="section-sub">
+          A few key systems I contributed to — focused on API integrations, real-time features, ERP modules, and reporting.
+        </p>
+
+        <div class="projects-grid">
+          <article class="project-card">
+            <h3 class="project-title">Dimhum Crowd Shipping System</h3>
+            <p class="project-sub">
+              Crowd shipping platform enabling users to place shipments and complete payments securely.
+            </p>
+            <p><strong>My contribution:</strong> Implemented Stripe API payment integration and supported payment flow handling.</p>
+            <div class="pill-row">
+              <span class="pill">Stripe API</span>
+              <span class="pill">Payments</span>
+              <span class="pill">Web App</span>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <h3 class="project-title">Courier Service System</h3>
+            <p class="project-sub">
+              Courier management platform for shipment operations, tracking, and service workflow automation.
+            </p>
+            <p><strong>My contribution:</strong> Integrated Pataho API to manage shipment operations and tracking updates.</p>
+            <div class="pill-row">
+              <span class="pill">Pataho API</span>
+              <span class="pill">Integration</span>
+              <span class="pill">Logistics</span>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <h3 class="project-title">Education Management ERP</h3>
+            <p class="project-sub">
+              ERP system for academic and administrative management in educational institutions.
+            </p>
+            <p><strong>My contribution:</strong> Built modules and reporting, ensured smooth workflows across features.</p>
+            <div class="pill-row">
+              <span class="pill">ERP</span>
+              <span class="pill">Reporting</span>
+              <span class="pill">Modules</span>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <h3 class="project-title">Attendance System</h3>
+            <p class="project-sub">
+              Attendance management module with tracking and summary insights.
+            </p>
+            <p><strong>My contribution:</strong> Developed attendance features and reporting for daily and summary views.</p>
+            <div class="pill-row">
+              <span class="pill">Attendance</span>
+              <span class="pill">Reports</span>
+              <span class="pill">Admin UI</span>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <h3 class="project-title">Fees Management System</h3>
+            <p class="project-sub">
+              Fee tracking and management with summaries and status monitoring.
+            </p>
+            <p><strong>My contribution:</strong> Implemented fee workflows and report generation for financial tracking.</p>
+            <div class="pill-row">
+              <span class="pill">Fees</span>
+              <span class="pill">Reporting</span>
+              <span class="pill">Dashboard</span>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <h3 class="project-title">Online Admission + SMS + Certificates</h3>
+            <p class="project-sub">
+              Online admission workflow with automated notifications and document generation.
+            </p>
+            <p><strong>My contribution:</strong> Built admission features, integrated SMS API, and created layout/certificate outputs with reports.</p>
+            <div class="pill-row">
+              <span class="pill">SMS API</span>
+              <span class="pill">Admission</span>
+              <span class="pill">Certificates</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
     <section id="about" class="section about">
       <div class="container about-grid">
         <div>
           <h2>About Me</h2>
-          <p>I'm a passionate software engineer with 5+ years of experience building web applications. I enjoy tackling complex problems and transforming ideas into robust, scalable solutions.</p>
-          <p>My approach combines technical expertise with design thinking to create products that are not only functional but also delightful to use.</p>
+          <p>
+            I'm a Front-End Developer with around 4 years of experience working on real-world systems including Vehicle Tracking (VTS),
+            crowd shipping, courier services, and Education Management ERP solutions.
+          </p>
+          <p>
+            I focus on building clean, scalable UI with React/Vue and delivering reliable features through strong API integration,
+            reporting, and performance-minded development.
+          </p>
           <ul class="about-list">
-            <li>Full-stack development with JavaScript/TypeScript</li>
-            <li>Cloud architecture and microservices</li>
-            <li>Agile methodologies and team collaboration</li>
-            <li>Performance optimization and security best practices</li>
+            <li>React + Redux, Vue + Pinia, PrimeReact/PrimeVue</li>
+            <li>Reusable custom components & modern UI development</li>
+            <li>Laravel/PHP backend integration and REST APIs</li>
+            <li>Reporting modules (daily/monthly/custom reports)</li>
+            <li>Team collaboration (IoT teams & product teams)</li>
           </ul>
         </div>
-        <aside class="profile-card" aria-hidden="true">
-          <div class="avatar">TA</div>
+
+        <aside class="profile-card">
+          <!-- Put your image at: assets/tanvir.jpg -->
+          <img class="profile-img" src="assets/tanvir.jpg" alt="Tanvir Ahmed" />
           <div>
             <h3>Tanvir Ahmed</h3>
-            <p>Software Engineer</p>
-            <p class="muted">Full-Stack Developer</p>
+            <p>Front-End Developer</p>
+            <p class="muted">React • Vue • PrimeReact/PrimeVue</p>
             <p class="muted">Based in Bangladesh</p>
             <div style="margin-top: 20px;">
               <p class="muted" style="font-size: 0.8rem;">Technologies I work with:</p>
               <p style="font-size: 0.9rem; color: var(--gray-dark);">
-                React, Node.js, TypeScript, MongoDB, AWS, Docker
+                React, Redux, Vue.js, Pinia, PrimeReact, PrimeVue, Laravel, PHP, MySQL, PostgreSQL, WebSocket
               </p>
             </div>
           </div>
@@ -688,15 +589,22 @@
       </div>
     </section>
 
+    <!-- CONTACT -->
     <section id="contact" class="section contact">
       <div class="container contact-grid">
         <div>
           <h2>Let's Build Something Amazing</h2>
-          <p>I'm currently available for freelance projects and full-time opportunities. Whether you need a complete application, consultation, or team collaboration, let's discuss how I can help bring your vision to life.</p>
+          <p>
+            I'm open to new opportunities and collaborations. If you need a reliable front-end developer for modern web applications,
+            API integrations, or reporting dashboards, let's talk.
+          </p>
           <p style="margin-top: 20px;">
-            <strong>Email:</strong> hello@tanvir.dev<br>
+            <strong>Email:</strong> your-email@example.com<br>
             <strong>Location:</strong> Dhaka, Bangladesh<br>
             <strong>Availability:</strong> Open to new projects
+          </p>
+          <p class="muted" style="margin-top: 12px;">
+            Tip: Replace the email above and update your social links in the footer.
           </p>
         </div>
 
@@ -711,19 +619,19 @@
           </label>
           <label>
             <span class="label-text">Project Type</span>
-            <select name="project-type" style="width: 100%; padding: 12px 16px; border: 1px solid var(--gray-light); border-radius: var(--border-radius); font-family: inherit; font-size: 1rem;">
+            <select name="project-type" required>
               <option value="">Select project type</option>
               <option value="web-app">Web Application</option>
-              <option value="mobile-app">Mobile App</option>
               <option value="ecommerce">E-Commerce</option>
-              <option value="api">API Development</option>
+              <option value="erp">ERP / Admin Panel</option>
+              <option value="api">API Integration</option>
               <option value="consultation">Technical Consultation</option>
               <option value="other">Other</option>
             </select>
           </label>
           <label>
             <span class="label-text">Message</span>
-            <textarea name="message" rows="4" placeholder="Tell me about your project, timeline, and budget..." required></textarea>
+            <textarea name="message" rows="4" placeholder="Tell me about your project requirements, timeline, and goals..." required></textarea>
           </label>
           <div class="form-actions">
             <button class="btn" type="submit">Send Message</button>
@@ -736,41 +644,40 @@
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <p>© <span id="year"></span> Tanvir Ahmed — Software Engineer & Creative Developer.</p>
+      <p>© <span id="year"></span> Tanvir Ahmed — Front-End Developer.</p>
       <nav class="footer-nav" aria-label="Footer">
-        <a href="https://github.com" target="_blank">GitHub</a>
-        <a href="https://linkedin.com" target="_blank">LinkedIn</a>
-        <a href="https://twitter.com" target="_blank">Twitter</a>
+        <!-- Replace these with your real links -->
+        <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         <a href="#contact">Contact</a>
       </nav>
     </div>
   </footer>
 
   <script>
-    // Mobile navigation toggle
     (function () {
+      // Mobile navigation toggle
       var nav = document.getElementById('primary-navigation');
       var btn = document.getElementById('navToggle');
+
       btn.addEventListener('click', function () {
         var expanded = this.getAttribute('aria-expanded') === 'true';
         this.setAttribute('aria-expanded', String(!expanded));
         nav.classList.toggle('open');
       });
 
-      // Set current year in footer
+      // Set current year
       document.getElementById('year').textContent = new Date().getFullYear();
-      
+
       // Form submission handler
       window.handleFormSubmit = function() {
         const form = document.querySelector('.contact-form');
         const formData = new FormData(form);
-        const name = formData.get('name');
-        
-        // Show success message
+        const name = formData.get('name') || 'there';
         alert(`Thank you ${name}! Your message has been sent. I'll get back to you shortly.`);
         form.reset();
       };
-      
+
       // Close mobile menu when clicking a link
       document.querySelectorAll('.nav-list a').forEach(link => {
         link.addEventListener('click', () => {
