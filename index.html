@@ -1,639 +1,163 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Tanvir — SWE (Full Stack Developer)</title>
-  <meta name="description" content="Tanvir's portfolio — Front-end developer focused on building fast, accessible, and visually engaging web experiences." />
-
-  <style>
-    /* CSS Reset & Base Styles */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    :root{
-      --primary:#2563eb;
-      --primary-dark:#1d4ed8;
-      --secondary:#7c3aed;
-      --dark:#1e293b;
-      --light:#f8fafc;
-      --gray:#64748b;
-      --gray-light:#e2e8f0;
-      --gray-dark:#334155;
-      --success:#10b981;
-      --border-radius:8px;
-      --shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -1px rgba(0,0,0,.06);
-      --shadow-lg:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -2px rgba(0,0,0,.05);
-      --transition:all .3s ease;
-    }
-
-    html{ scroll-behavior:smooth; }
-
-    body{
-      font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,'Open Sans','Helvetica Neue',sans-serif;
-      line-height:1.6;
-      color:var(--dark);
-      background:#fff;
-      overflow-x:hidden;
-    }
-
-    .container{ width:100%; max-width:1200px; margin:0 auto; padding:0 20px; }
-    section{ padding:80px 0; }
-    h1,h2,h3,h4{ font-weight:700; line-height:1.2; margin-bottom:1rem; }
-    h1{ font-size:2.5rem; }
-    h2{ font-size:2rem; }
-    h3{ font-size:1.5rem; }
-    p{ margin-bottom:1.5rem; color:var(--gray-dark); }
-    a{ text-decoration:none; color:inherit; }
-    ul{ list-style-position:inside; }
-
-    /* Utility */
-    .sr-only{
-      position:absolute; width:1px; height:1px; padding:0; margin:-1px;
-      overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
-    }
-    .lead{ font-size:1.25rem; font-weight:400; color:var(--gray-dark); }
-    .muted{ color:var(--gray); font-size:.9rem; }
-
-    /* Buttons */
-    .btn{
-      display:inline-block;
-      padding:12px 28px;
-      background:var(--primary);
-      color:#fff;
-      border-radius:var(--border-radius);
-      font-weight:600;
-      border:none;
-      cursor:pointer;
-      transition:var(--transition);
-      text-align:center;
-      font-size:1rem;
-    }
-    .btn:hover{ background:var(--primary-dark); transform:translateY(-2px); box-shadow:var(--shadow); }
-    .btn-ghost{
-      background:transparent;
-      color:var(--primary);
-      border:1px solid var(--gray-light);
-    }
-    .btn-ghost:hover{ background:var(--gray-light); color:var(--primary-dark); }
-
-    /* Header */
-    .site-header{
-      position:fixed; top:0; width:100%;
-      background:rgba(255,255,255,.95);
-      backdrop-filter:blur(10px);
-      z-index:1000;
-      box-shadow:0 1px 3px rgba(0,0,0,.05);
-      padding:16px 0;
-    }
-    .header-inner{ display:flex; justify-content:space-between; align-items:center; }
-    .brand{ font-size:1.75rem; font-weight:700; color:var(--dark); }
-    .dot{ color:var(--primary); }
-
-    .nav-toggle{ display:none; background:none; border:none; cursor:pointer; color:var(--dark); }
-    .nav{ display:block; }
-    .nav-list{ display:flex; gap:32px; align-items:center; }
-    .nav-list li{ list-style:none; }
-    .nav-list a{
-      font-weight:500;
-      color:var(--gray-dark);
-      transition:var(--transition);
-      position:relative;
-    }
-    .nav-list a:hover{ color:var(--primary); }
-    .nav-list a::after{
-      content:'';
-      position:absolute; width:0; height:2px;
-      bottom:-5px; left:0;
-      background:var(--primary);
-      transition:width .3s ease;
-    }
-    .nav-list a:hover::after{ width:100%; }
-
-    /* Hero */
-    .hero{
-      padding-top:140px;
-      background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);
-      overflow:hidden;
-    }
-    .hero-grid{
-      display:grid;
-      grid-template-columns:1.1fr .9fr;
-      gap:60px;
-      align-items:center;
-    }
-    .hero-content h1{ font-size:3rem; margin-bottom:24px; }
-    .hero-ctas{ display:flex; gap:16px; margin-top:32px; flex-wrap:wrap; }
-
-    .hero-card{
-      background:#fff;
-      border-radius:16px;
-      padding:32px;
-      box-shadow:var(--shadow-lg);
-      transform:rotate(2deg);
-      transition:var(--transition);
-      border:1px solid var(--gray-light);
-    }
-    .hero-card:hover{ transform:rotate(0deg) translateY(-10px); }
-    .card-header{
-      display:inline-block;
-      background:var(--primary);
-      color:#fff;
-      padding:6px 12px;
-      border-radius:20px;
-      font-size:.75rem;
-      font-weight:600;
-      margin-bottom:20px;
-    }
-    .card-meta{
-      display:flex; gap:8px; margin-top:20px;
-      color:var(--gray); font-size:.9rem; align-items:center; flex-wrap:wrap;
-    }
-
-    /* Sections */
-    .section-title{ text-align:center; margin-bottom:16px; }
-    .section-sub{
-      text-align:center;
-      max-width:760px;
-      margin:0 auto 60px;
-      color:var(--gray);
-    }
-
-    /* Features */
-    .features-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:40px;
-    }
-    .feature{
-      background:#fff;
-      padding:40px 30px;
-      border-radius:var(--border-radius);
-      text-align:center;
-      box-shadow:var(--shadow);
-      transition:var(--transition);
-      border:1px solid transparent;
-    }
-    .feature:hover{ border-color:var(--primary); transform:translateY(-5px); }
-    .feature-ico{ margin-bottom:24px; color:var(--primary); }
-
-    /* Projects */
-    .projects{ background:#fff; }
-    .projects-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:28px;
-    }
-    .project-card{
-      background:#fff;
-      border:1px solid var(--gray-light);
-      border-radius:14px;
-      padding:24px;
-      box-shadow:var(--shadow);
-      transition:var(--transition);
-      height:100%;
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-    }
-    .project-card:hover{ transform:translateY(-6px); border-color:rgba(37,99,235,.35); }
-    .pill-row{ display:flex; gap:8px; flex-wrap:wrap; margin-top:auto; padding-top:8px; }
-    .pill{
-      font-size:.78rem;
-      padding:6px 10px;
-      border-radius:999px;
-      background:var(--light);
-      border:1px solid var(--gray-light);
-      color:var(--gray-dark);
-      white-space:nowrap;
-    }
-    .project-title{ margin-bottom:.25rem; }
-    .project-sub{ color:var(--gray); font-size:.92rem; margin-bottom:0; }
-
-    /* About */
-    .about{ background:var(--light); }
-    .about-grid{
-      display:grid;
-      grid-template-columns:2fr 1fr;
-      gap:60px;
-      align-items:start;
-    }
-    .about-list{ margin-top:20px; }
-    .about-list li{
-      list-style:none;
-      margin-bottom:12px;
-      padding-left:24px;
-      position:relative;
-    }
-    .about-list li::before{
-      content:'✓';
-      position:absolute;
-      left:0;
-      color:var(--success);
-      font-weight:bold;
-    }
-
-    .profile-card{
-      background:#fff;
-      border-radius:var(--border-radius);
-      padding:30px;
-      box-shadow:var(--shadow);
-      text-align:center;
-      border-top:4px solid var(--primary);
-    }
-
-    /* Profile image */
-    .profile-img{
-      width:110px;
-      height:110px;
-      border-radius:50%;
-      object-fit:cover;
-      display:block;
-      margin:0 auto 18px;
-      border:3px solid var(--gray-light);
-      box-shadow:var(--shadow);
-      background:linear-gradient(135deg,var(--primary),var(--secondary));
-    }
-
-    /* Contact */
-    .contact-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:60px;
-    }
-    .contact-form{
-      background:#fff;
-      padding:40px;
-      border-radius:var(--border-radius);
-      box-shadow:var(--shadow);
-    }
-    label{ display:block; margin-bottom:24px; }
-    .label-text{ display:block; margin-bottom:8px; font-weight:600; color:var(--dark); }
-
-    input,textarea,select{
-      width:100%;
-      padding:12px 16px;
-      border:1px solid var(--gray-light);
-      border-radius:var(--border-radius);
-      font-family:inherit;
-      font-size:1rem;
-      transition:var(--transition);
-      background:#fff;
-    }
-    input:focus,textarea:focus,select:focus{
-      outline:none;
-      border-color:var(--primary);
-      box-shadow:0 0 0 3px rgba(37,99,235,.1);
-    }
-    .form-actions{ display:flex; gap:16px; flex-wrap:wrap; }
-
-    /* Footer */
-    .site-footer{
-      background:var(--dark);
-      color:#fff;
-      padding:40px 0;
-    }
-    .footer-inner{ display:flex; justify-content:space-between; align-items:center; gap:18px; }
-    .footer-nav{ display:flex; gap:24px; flex-wrap:wrap; }
-    .footer-nav a{ color:var(--gray-light); transition:var(--transition); }
-    .footer-nav a:hover{ color:#fff; }
-
-    /* Responsive */
-    @media (max-width: 992px){
-      .hero-grid,.about-grid,.contact-grid{ grid-template-columns:1fr; gap:40px; }
-      .features-grid{ grid-template-columns:repeat(2,1fr); }
-      .projects-grid{ grid-template-columns:repeat(2,1fr); }
-      h1{ font-size:2.25rem; }
-      .hero-content h1{ font-size:2.5rem; }
-    }
-    @media (max-width: 768px){
-      .nav-toggle{ display:block; }
-      .nav{
-        position:fixed;
-        top:70px; left:0;
-        width:100%;
-        background:#fff;
-        box-shadow:var(--shadow);
-        padding:20px;
-        transform:translateY(-100%);
-        opacity:0;
-        visibility:hidden;
-        transition:var(--transition);
-      }
-      .nav.open{ transform:translateY(0); opacity:1; visibility:visible; }
-      .nav-list{ flex-direction:column; gap:20px; align-items:flex-start; }
-      .hero{ padding-top:120px; }
-      .hero-ctas{ flex-direction:column; }
-      .features-grid{ grid-template-columns:1fr; }
-      .projects-grid{ grid-template-columns:1fr; }
-      .footer-inner{ flex-direction:column; text-align:center; }
-      .footer-nav{ justify-content:center; }
-    }
-    @media (max-width: 576px){
-      section{ padding:60px 0; }
-      h1{ font-size:2rem; }
-      h2{ font-size:1.75rem; }
-      .hero-content h1{ font-size:2rem; }
-      .contact-form{ padding:30px 20px; }
-      .form-actions{ flex-direction:column; }
-    }
-
-    /* Animations */
-    @keyframes fadeIn{
-      from{ opacity:0; transform:translateY(20px); }
-      to{ opacity:1; transform:translateY(0); }
-    }
-    .hero-content,.hero-card,.feature,.project-card,.profile-card,.contact-form{ animation:fadeIn .8s ease-out; }
-    .feature:nth-child(2){ animation-delay:.1s; }
-    .feature:nth-child(3){ animation-delay:.2s; }
-    .project-card:nth-child(2){ animation-delay:.05s; }
-    .project-card:nth-child(3){ animation-delay:.1s; }
-    .project-card:nth-child(4){ animation-delay:.15s; }
-    .project-card:nth-child(5){ animation-delay:.2s; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tanvir Ahmed | AI Research Portfolio</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f4f7fb;margin:0;color:#222}
+header{background:#0f172a;color:#fff;padding:60px 20px;text-align:center}
+section{max-width:1100px;margin:auto;padding:50px 20px}
+.card{background:#fff;padding:25px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.1);margin-bottom:25px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+h2{color:#1d4ed8}
+.tag{display:inline-block;background:#e0ecff;padding:6px 10px;border-radius:20px;margin:4px}
+footer{background:#0f172a;color:#fff;text-align:center;padding:20px}
+</style>
 </head>
-
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="#">Tanvir<span class="dot">.</span></a>
 
-      <button class="nav-toggle" aria-expanded="false" aria-controls="primary-navigation" id="navToggle">
-        <span class="sr-only">Toggle navigation</span>
-        <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-        </svg>
-      </button>
+<header>
+<h1>Tanvir Ahmed</h1>
+<h3>AI Researcher | Computer Vision | Machine Learning | Digital Twin Research</h3>
+<p>B.Sc. in Computer Science & Engineering | 4+ Years Software Engineering Experience</p>
+</header>
 
-      <nav id="primary-navigation" class="nav">
-        <ul class="nav-list">
-          <li><a href="#features">Expertise</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li><a class="btn btn-ghost" href="#get-started">Get Started</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+<section>
+<div class="card">
+<h2>About Me</h2>
+<p>
+I am an AI researcher with professional software engineering experience and a strong
+background in Machine Learning, Computer Vision, Data Science, and Spatial Data
+Modeling. My undergraduate research developed an integrated machine learning
+framework for indoor coverage optimization using RSSI measurements, user
+localization, and intelligent prediction models.
+</p>
 
-  <main>
-    <!-- HERO -->
-    <section class="hero">
-      <div class="container hero-grid">
-        <div class="hero-content">
-          <h1>Hi, I'm Tanvir — SWE (Full Stack Developer)</h1>
-          <p class="lead">
-            I build responsive, user-friendly web applications with React and Vue, focusing on performance, clean UI,
-            and real-world business solutions. I enjoy building reusable components, integrating APIs, and delivering smooth user experiences.
-          </p>
-          <p class="hero-ctas">
-            <a class="btn" href="#contact">Start a Project</a>
-            <a class="btn btn-ghost" href="#projects">View Projects</a>
-          </p>
-        </div>
+<p>
+My current research interests include Digital Twins, 3D Computer Vision,
+Photogrammetry, Point Cloud Processing, Structural Health Monitoring,
+Heritage Building Preservation, and AI-driven damage assessment.
+</p>
+</div>
 
-        <!-- Featured Project -->
-        <div class="hero-card" aria-hidden="true">
-          <div class="card-inner">
-            <div class="card-header">Featured Project</div>
-            <h3>Vehicle Tracking System (VTS)</h3>
-            <p>
-              A real-time vehicle tracking platform integrated with IoT devices. Built live tracking features using WebSocket communication,
-              created daily/monthly reports, and ensured uptime by monitoring error logs and high-volume database transactions.
-            </p>
-            <div class="card-meta">
-              <span>WebSocket • IoT</span>
-              <span>•</span>
-              <span>MySQL/PostgreSQL • Reporting</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+<div class="card">
+<h2>Featured Research</h2>
+<h3>Integrated Machine Learning Framework for Indoor Coverage Optimization</h3>
 
-    <!-- EXPERTISE -->
-    <section id="features" class="section features">
-      <div class="container">
-        <h2 class="section-title">My Expertise</h2>
-        <p class="section-sub">
-          Front-end focused development with strong API integration, reusable components, and production-ready reporting modules.
-        </p>
+<p>
+Developed an integrated AI model for indoor wireless coverage prediction using
+RSSI measurements, user coordinates, and building layouts.
+</p>
 
-        <div class="features-grid">
-          <article class="feature">
-            <svg class="feature-ico" width="48" height="48" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="1.5" fill="none"/>
-            </svg>
-            <h3>Frontend Development</h3>
-            <p>
-              React (Redux/Redux Toolkit), Vue (Pinia), PrimeReact/PrimeVue, reusable custom components,
-              responsive UI, accessibility, and performance optimization.
-            </p>
-          </article>
+<ul>
+<li>Indoor Spatial Data Modeling</li>
+<li>Machine Learning Prediction</li>
+<li>Feature Engineering</li>
+<li>Environmental Modeling</li>
+<li>Coverage Optimization</li>
+<li>Performance Evaluation</li>
+</ul>
+</div>
 
-          <article class="feature">
-            <svg class="feature-ico" width="48" height="48" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M20 14.66V20a2 2 0 01-2 2H6a2 2 0 01-2-2v-5.34M18 2l4 4-4 4M6 10l4-4-4-4" stroke="currentColor" stroke-width="1.5" fill="none"/>
-              <path d="M14 10l-4 8h8" stroke="currentColor" stroke-width="1.5" fill="none"/>
-            </svg>
-            <h3>Backend & APIs</h3>
-            <p>
-              Laravel (PHP), REST API integration, Stripe payments, Pataho courier API integration,
-              authentication flows, and scalable modules for business applications.
-            </p>
-          </article>
+<h2>Research Experience</h2>
 
-          <article class="feature">
-            <svg class="feature-ico" width="48" height="48" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" stroke="currentColor" stroke-width="1.5" fill="none"/>
-              <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" stroke="currentColor" stroke-width="1.5" fill="none"/>
-            </svg>
-            <h3>Reliability & Reporting</h3>
-            <p>
-              Debugging and log monitoring, database transaction awareness, building daily/monthly/custom reports,
-              and ensuring smooth uptime in production systems.
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
+<div class="grid">
 
-    <!-- PROJECTS -->
-    <section id="projects" class="section projects">
-      <div class="container">
-        <h2 class="section-title">Projects</h2>
-        <p class="section-sub">
-          A few key systems I contributed to — focused on API integrations, real-time features, ERP modules, and reporting.
-        </p>
+<div class="card">
+<h3>Indoor Spatial Data Modeling</h3>
+<p>
+Designed AI models to understand indoor environments through RSSI data,
+user localization, and building geometry.
+</p>
+</div>
 
-        <div class="projects-grid">
-          <article class="project-card">
-            <h3 class="project-title">Dimhum Crowd Shipping System</h3>
-            <p class="project-sub">
-              Crowd shipping platform enabling users to place shipments and complete payments securely.
-            </p>
-            <p><strong>My contribution:</strong> Implemented Stripe API payment integration and supported payment flow handling.</p>
-            <div class="pill-row">
-              <span class="pill">Stripe API</span>
-              <span class="pill">Payments</span>
-              <span class="pill">Web App</span>
-            </div>
-          </article>
+<div class="card">
+<h3>Computer Vision</h3>
+<p>
+Worked with Image Classification, Object Detection (YOLO),
+Semantic Segmentation, Feature Matching, and Vision Transformers.
+</p>
+</div>
 
-          <article class="project-card">
-            <h3 class="project-title">Courier Service System</h3>
-            <p class="project-sub">
-              Courier management platform for shipment operations, tracking, and service workflow automation.
-            </p>
-            <p><strong>My contribution:</strong> Integrated Pataho API to manage shipment operations and tracking updates.</p>
-            <div class="pill-row">
-              <span class="pill">Pataho API</span>
-              <span class="pill">Integration</span>
-              <span class="pill">Logistics</span>
-            </div>
-          </article>
+<div class="card">
+<h3>Machine Learning</h3>
+<p>
+Built predictive models using Python, Scikit-learn,
+TensorFlow, and PyTorch for intelligent decision making.
+</p>
+</div>
 
-          <article class="project-card">
-            <h3 class="project-title">Education Management ERP</h3>
-            <p class="project-sub">
-              ERP system for academic and administrative management in educational institutions.
-            </p>
-            <p><strong>My contribution:</strong> Built modules and reporting, ensured smooth workflows across features.</p>
-            <div class="pill-row">
-              <span class="pill">ERP</span>
-              <span class="pill">Reporting</span>
-              <span class="pill">Modules</span>
-            </div>
-          </article>
+<div class="card">
+<h3>Future Research</h3>
+<p>
+Interested in AI-based Digital Twins, Point Cloud Processing,
+Photogrammetry, Crack Detection, Heritage Building Documentation,
+and Structural Damage Assessment.
+</p>
+</div>
 
-          <article class="project-card">
-            <h3 class="project-title">Attendance System</h3>
-            <p class="project-sub">
-              Attendance management module with tracking and summary insights.
-            </p>
-            <p><strong>My contribution:</strong> Developed attendance features and reporting for daily and summary views.</p>
-            <div class="pill-row">
-              <span class="pill">Attendance</span>
-              <span class="pill">Reports</span>
-              <span class="pill">Admin UI</span>
-            </div>
-          </article>
+<div class="card">
+<h3>Research Vision</h3>
+<p>
+My long-term goal is to develop AI systems capable of reconstructing,
+monitoring, and preserving heritage structures in disaster-prone regions
+through Digital Twin technology and Computer Vision.
+</p>
+</div>
 
-          <article class="project-card">
-            <h3 class="project-title">Fees Management System</h3>
-            <p class="project-sub">
-              Fee tracking and management with summaries and status monitoring.
-            </p>
-            <p><strong>My contribution:</strong> Implemented fee workflows and report generation for financial tracking.</p>
-            <div class="pill-row">
-              <span class="pill">Fees</span>
-              <span class="pill">Reporting</span>
-              <span class="pill">Dashboard</span>
-            </div>
-          </article>
+<div class="card">
+<h3>Research Applications</h3>
+<p>
+Future work includes AI-assisted crack detection, wall geometry estimation,
+ray tracing, 3D reconstruction, and intelligent infrastructure monitoring.
+</p>
+</div>
 
-          <article class="project-card">
-            <h3 class="project-title">Online Admission + SMS + Certificates</h3>
-            <p class="project-sub">
-              Online admission workflow with automated notifications and document generation.
-            </p>
-            <p><strong>My contribution:</strong> Built admission features, integrated SMS API, and created layout/certificate outputs with reports.</p>
-            <div class="pill-row">
-              <span class="pill">SMS API</span>
-              <span class="pill">Admission</span>
-              <span class="pill">Certificates</span>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
+</div>
 
-    <!-- ABOUT -->
-    <section id="about" class="section about">
-      <div class="container about-grid">
-        <div>
-          <h2>About Me</h2>
-          <p>
-            I'm a Front-End Developer with around 4 years of experience working on real-world systems including Vehicle Tracking (VTS),
-            crowd shipping, courier services, and Education Management ERP solutions.
-          </p>
-          <p>
-            I focus on building clean, scalable UI with React/Vue and delivering reliable features through strong API integration,
-            reporting, and performance-minded development.
-          </p>
-          <ul class="about-list">
-            <li>React + Redux, Vue + Pinia, PrimeReact/PrimeVue</li>
-            <li>Reusable custom components & modern UI development</li>
-            <li>Laravel/PHP backend integration and REST APIs</li>
-            <li>Reporting modules (daily/monthly/custom reports)</li>
-            <li>Team collaboration (IoT teams & product teams)</li>
-          </ul>
-        </div>
+<div class="card">
+<h2>Technical Skills</h2>
 
-        <aside class="profile-card">
-          <!-- Put your image at: assets/tanvir.jpg -->
-          <img class="profile-img" src="tanvir.jpeg" alt="Tanvir Ahmed" />
-          <div>
-            <h3>Tanvir Ahmed</h3>
-            <p>Front-End Developer</p>
-            <p class="muted">React • Vue • PrimeReact/PrimeVue</p>
-            <p class="muted">Based in Bangladesh</p>
-            <div style="margin-top: 20px;">
-              <p class="muted" style="font-size: 0.8rem;">Technologies I work with:</p>
-              <p style="font-size: 0.9rem; color: var(--gray-dark);">
-                React, Redux, Vue.js, Pinia, PrimeReact, PrimeVue, Laravel, PHP, MySQL, PostgreSQL, WebSocket
-              </p>
-            </div>
-          </div>
-        </aside>
-      </div>
-    </section>
+<span class="tag">Python</span>
+<span class="tag">PyTorch</span>
+<span class="tag">TensorFlow</span>
+<span class="tag">OpenCV</span>
+<span class="tag">YOLO</span>
+<span class="tag">Vision Transformer</span>
+<span class="tag">Scikit-learn</span>
+<span class="tag">NumPy</span>
+<span class="tag">Pandas</span>
+<span class="tag">Open3D</span>
+<span class="tag">Git</span>
+<span class="tag">Linux</span>
+<span class="tag">Vue.js</span>
+<span class="tag">Laravel</span>
 
-    <!-- CONTACT -->
-   
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>© <span id="year"></span> Tanvir Ahmed — Front-End Developer.</p>
-      <nav class="footer-nav" aria-label="Footer">
-        <!-- Replace these with your real links -->
-        <a href="https://github.com/Tanvir-Ahmed98" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </div>
-  </footer>
+</div>
 
-  <script>
-    (function () {
-      // Mobile navigation toggle
-      var nav = document.getElementById('primary-navigation');
-      var btn = document.getElementById('navToggle');
+<div class="card">
+<h2>Research Interests</h2>
+<ul>
+<li>Artificial Intelligence</li>
+<li>Computer Vision</li>
+<li>Machine Learning</li>
+<li>Deep Learning</li>
+<li>Digital Twin</li>
+<li>3D Reconstruction</li>
+<li>Photogrammetry</li>
+<li>Point Cloud Processing</li>
+<li>Structural Health Monitoring</li>
+<li>Heritage Building Preservation</li>
+</ul>
+</div>
 
-      btn.addEventListener('click', function () {
-        var expanded = this.getAttribute('aria-expanded') === 'true';
-        this.setAttribute('aria-expanded', String(!expanded));
-        nav.classList.toggle('open');
-      });
+</section>
 
-      // Set current year
-      document.getElementById('year').textContent = new Date().getFullYear();
+<footer>
+© 2026 Tanvir Ahmed | AI Research Portfolio
+</footer>
 
-      // Form submission handler
-      window.handleFormSubmit = function() {
-        const form = document.querySelector('.contact-form');
-        const formData = new FormData(form);
-        const name = formData.get('name') || 'there';
-        alert(`Thank you ${name}! Your message has been sent. I'll get back to you shortly.`);
-        form.reset();
-      };
-
-      // Close mobile menu when clicking a link
-      document.querySelectorAll('.nav-list a').forEach(link => {
-        link.addEventListener('click', () => {
-          nav.classList.remove('open');
-          btn.setAttribute('aria-expanded', 'false');
-        });
-      });
-    })();
-  </script>
 </body>
 </html>
