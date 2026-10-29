@@ -197,8 +197,10 @@
       const recentHistory = history.slice(-4).map(item => item.content).join(' ');
       const sources = await retrieve(question, recentHistory);
       const skillTopic = getSkillTopic(question);
-      const allKnowledge = (await loadKnowledge()).map(item => item.text.toLocaleLowerCase()).join('\n');
-      if ((skillTopic && !allKnowledge.includes(skillTopic.toLocaleLowerCase())) || !sources.length) {
+      const knownTerms = new Set((await loadKnowledge()).flatMap(item => [...item.terms.keys()]));
+      const topicTerms = tokenize(skillTopic);
+      const topicMissing = skillTopic && topicTerms.some(term => !knownTerms.has(term));
+      if (topicMissing || !sources.length) {
         const answer = missingAnswer(question, skillTopic);
         pending.remove();
         addMessage(answer, 'assistant');
