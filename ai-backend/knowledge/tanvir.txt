@@ -1,7 +1,7 @@
 # Tanvir Ahmed — portfolio and CV facts
 
 ## Profile
-Tanvir Ahmed is a software engineer based in Dhaka, Bangladesh. He has more than five years of hands-on software engineering experience building and maintaining production SaaS systems. His professional experience includes multi-tenant platforms, REST API integration, data-heavy dashboards, Linux/VPS operations, AI and MCP automation, and team leadership. He earned a BSc in Computer Science and Engineering from East West University in Dhaka (2016–2020).
+Tanvir Ahmed is a software engineer and PhD candidate based in Dhaka, Bangladesh. He has more than five years of hands-on software engineering experience building and maintaining production SaaS systems. His professional experience includes multi-tenant platforms, REST API integration, data-heavy dashboards, Linux/VPS operations, AI and MCP automation, and team leadership. He earned a BSc in Computer Science and Engineering from East West University in Dhaka (2016–2020). Tanvir reports a CGPA of 2.48 and 73% marks for his BSc; these are recorded as supplied, without inferring a grading-scale conversion. He identifies as a PhD candidate; his doctoral institution, discipline, start date, and research topic have not been provided.
 
 ## Current role — Software Engineer, Automate IT Ltd.
 Jan 2025–Present, Dhaka, Bangladesh. Tanvir maintains and expands a multi-tenant Education Management ERP used by institutional clients. Work includes fees, attendance, admissions, leave management, and ID card design workflows. He builds frontend architecture with Vue.js, Nuxt.js, PrimeVue, PrimeReact, and reusable components; integrates REST APIs; and improves data-heavy ERP screens with server-side pagination, filtering, sorting, lazy loading, memoisation, and efficient data fetching. He also contributes to release planning, environment reviews, production debugging, and Linux/VPS deployment support.
@@ -42,7 +42,17 @@ The portfolio describes research interests in computer vision, machine learning,
 The CV lists Python as a language and mentions Python automation, MCP (Model Context Protocol) automation, and AI workflow automation. It states more than five years of overall software engineering experience, but does not specify how many years Tanvir has used Python specifically and does not name a particular project as Python-built. Do not turn the overall career duration into Python-specific experience.
 
 ## Education and ongoing learning
-BSc in Computer Science and Engineering, East West University, Dhaka, 2016–2020. Tanvir is actively building hands-on knowledge in AWS, Docker, Terraform, Kubernetes, cloud infrastructure, and Infrastructure-as-Code, and continues learning modern frontend and performance practices.
+- BSc in Computer Science and Engineering, East West University, Dhaka, 2016–2020. Tanvir reports a CGPA of 2.48 and 73% marks; do not infer a conversion between these figures or a grading scale.
+- HSC, Rajarbag Police Lines School & College; GPA 4.42.
+- SSC, Ideal School and College; GPA 5.00.
+- Tanvir identifies as a PhD candidate. The institution, discipline, start date, and dissertation topic are not yet specified; do not invent them.
+Tanvir is actively building hands-on knowledge in AWS, Docker, Terraform, Kubernetes, cloud infrastructure, and Infrastructure-as-Code, and continues learning modern frontend and performance practices.
+
+## Professional strengths evidenced by work
+The CV documents team leadership and mentoring, cross-team collaboration, sprint planning, code review, client and product stakeholder communication, release coordination, systematic debugging, and ownership of production SaaS systems. Describe these as demonstrated professional strengths, not as results from a personality test or unsupported personal character traits.
 
 ## Contact and public links
 Email: tanvir.rafee405@gmail.com. Location: Dhaka, Bangladesh. Portfolio: tanvir-ahmed98.github.io. GitHub: github.com/Tanvir-Ahmed98.
+
+## Professional strengths detail
+When asked about character traits, explain that the CV does not contain a personality-test result. It does provide evidence of leadership, mentoring, collaboration, planning, communication, systematic debugging, and production ownership through Tanvir’s documented engineering work.

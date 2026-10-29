@@ -142,17 +142,24 @@
   function directProfileAnswer(question) {
     if (!/\b(tell me about|who is|describe|introduce)\b.{0,30}\b(tanvir|him|he)\b/iu.test(question)) return null;
     return {
-      answer: 'Tanvir Ahmed is a Dhaka-based software engineer with 5+ years of experience building production SaaS systems. He currently works at Automate IT Ltd. and holds a BSc in Computer Science and Engineering from East West University.',
+      answer: 'Tanvir Ahmed is a Dhaka-based software engineer and PhD candidate with 5+ years of experience building production SaaS systems. He currently works at Automate IT Ltd. and holds a BSc in Computer Science and Engineering from East West University.',
       sources: ['Profile', 'Current role — Software Engineer, Automate IT Ltd.', 'Education and ongoing learning']
     };
   }
 
   function directEducationAnswer(question) {
-    if (!/\b(education|degree|university|school|study|studied|graduated|coursework)\b|শিক্ষা|পড়াশোনা|বিশ্ববিদ্যালয়/iu.test(question)) return null;
-    if (/\b(cgpa|gpa|grade|grades|marks|score)\b/iu.test(question)) return null;
+    if (!/\b(education|degree|university|school|study|studied|graduated|coursework|cgpa|gpa|grade|grades|marks|score|hsc|ssc)\b|শিক্ষা|পড়াশোনা|বিশ্ববিদ্যালয়/iu.test(question)) return null;
     return {
-      answer: 'Tanvir completed a BSc in Computer Science and Engineering at East West University in Dhaka (2016–2020). His CV lists Data Structures and Algorithms, Database Systems, Software Engineering, Operating Systems, Computer Networks, Object-Oriented Programming, and Web Technologies among his relevant study areas.',
+      answer: 'Tanvir completed a BSc in Computer Science and Engineering at East West University, Dhaka (2016–2020), and reports a CGPA of 2.48 with 73% marks. He completed HSC at Rajarbag Police Lines School & College (GPA 4.42) and SSC at Ideal School and College (GPA 5.00). He identifies as a PhD candidate; his institution and research discipline have not been provided.',
       source: 'Education and ongoing learning'
+    };
+  }
+
+  function directStrengthAnswer(question) {
+    if (!/\b(character|personality|trait|traits|strength|strengths)\b/iu.test(question)) return null;
+    return {
+      answer: 'Tanvir’s CV does not include a personality-test result. His documented professional strengths include team leadership and mentoring, cross-team collaboration, sprint planning, stakeholder communication, release coordination, systematic debugging, and ownership of production SaaS systems.',
+      source: 'Professional strengths evidenced by work'
     };
   }
 
@@ -300,6 +307,13 @@
         pending.remove();
         addMessage(profileAnswer.answer, 'assistant', profileAnswer.sources);
         history.push({ role: 'user', content: question }, { role: 'assistant', content: profileAnswer.answer });
+        return;
+      }
+      const strengthsAnswer = directStrengthAnswer(question);
+      if (strengthsAnswer) {
+        pending.remove();
+        addMessage(strengthsAnswer.answer, 'assistant', [strengthsAnswer.source]);
+        history.push({ role: 'user', content: question }, { role: 'assistant', content: strengthsAnswer.answer });
         return;
       }
       const educationAnswer = directEducationAnswer(question);
