@@ -1,52 +1,29 @@
 # Tanvir Ahmed portfolio
 
-Static portfolio site with an optional self-hosted, CV-grounded AI assistant.
+Static portfolio site with a private, browser-based AI assistant. The primary GitHub Pages setup does not need a VPS, FastAPI server, API key, or third-party LLM API.
 
-## Ask Tanvir AI (local LLM + RAG)
+## Ask Tanvir AI
 
-The portfolio stays static and can be hosted on GitHub Pages. The assistant UI sends questions to the separate FastAPI backend in `ai-backend/`. The backend retrieves relevant passages from `ai-backend/knowledge/tanvir.md` using local Ollama embeddings, then asks a locally running Ollama model to answer from those passages. No third-party LLM API is used.
+The chat runs RAG in the visitor's browser:
 
-This is retrieval augmented generation (RAG), not training a foundation model from scratch. The source material is editable in `ai-backend/knowledge/tanvir.md`; edit it when the CV or portfolio changes.
+1. It downloads the Qwen3-0.6B WebLLM model on the visitor's first question and caches model files in the browser.
+2. It retrieves relevant passages from `ai-backend/knowledge/tanvir.txt` with local BM25 scoring.
+3. It sends the selected passages and question to the local WebGPU model. The question and retrieved CV text stay in the browser.
 
-### Run locally
+WebLLM JavaScript is loaded from `esm.run`, while model files are downloaded from Hugging Face. Those are runtime/model file downloads, not LLM API calls. The model is approximately 352 MB; the first download may take a few minutes and later visits can reuse the browser cache. A WebGPU-capable desktop browser is required. If WebGPU is unavailable or the device does not have enough GPU memory, the chat reports that instead of calling a remote model.
 
-1. Install [Ollama](https://ollama.com/) on the computer that will host the model, then start it.
-2. Download the local chat and embedding models:
+The CV knowledge source is `ai-backend/knowledge/tanvir.txt`. Update it when the resume or portfolio changes. Retrieval is lexical BM25 with English, Bangla, and Banglish query aliases; answer quality depends on the compact local model and relevant retrieved passages.
 
-   ```sh
-   ollama pull qwen2.5:3b
-   ollama pull nomic-embed-text
-   ```
+## Run locally
 
-   `qwen2.5:3b` is a modest default for local use. Set `CHAT_MODEL` in the environment to another Ollama model if your machine can run a larger one.
+Serve the repository root over HTTP(S), for example:
 
-3. Start the API from the repository root:
-
-   ```sh
-   cd ai-backend
-   python3 -m venv .venv
-   source .venv/bin/activate
-   pip install -r requirements.txt
-   cp .env.example .env
-   uvicorn main:app --host 0.0.0.0 --port 8000
-   ```
-
-4. Serve the repository root with a local static server (for example `python3 -m http.server 5500`) and open `http://localhost:5500`.
-
-The RAG index is embedded on the first question and cached in backend memory. Restarting the backend rebuilds it from the knowledge file. Ollama must remain running for the chat to answer.
-
-### Deploy
-
-GitHub Pages cannot run Python or host an LLM. For a public assistant, deploy `ai-backend/` and Ollama on an always-on server you control. A Docker Compose setup is provided. It downloads the configured local models, runs the API, and puts Caddy in front to provide HTTPS. The server needs Docker, enough RAM/disk for the model, and a domain you control pointed at the server with ports 80 and 443 reachable.
-
-On that server, copy `ai-backend/.env.example` to `ai-backend/.env`, set `API_DOMAIN` to your API hostname, and set `ALLOWED_ORIGINS=https://tanvir-ahmed98.github.io`. Then run `docker compose up -d --build` from `ai-backend/`.
-
-Before publishing the frontend, set its API URL near the top of `chat.js`, for example:
-
-```js
-const API_URL = window.TANVIR_AI_API_URL || 'https://your-api-domain.example/api/chat';
+```sh
+python3 -m http.server 5500
 ```
 
-Use HTTPS for the public API and allow only your portfolio origin in `ALLOWED_ORIGINS`. Do not expose Ollama's port directly to the public internet; expose the FastAPI service through a TLS reverse proxy and add rate limiting/authentication at that proxy before opening it to unrestricted traffic. The browser widget currently points to `http://localhost:8000`, which is for local development.
+Then open `http://localhost:5500` in a browser with WebGPU enabled and ask a question. No Python AI backend is used by the page.
 
-The API endpoint is `POST /api/chat` with JSON `{ "question": "...", "history": [] }`; `GET /api/health` reports configured model names.
+## Optional self-hosted backend
+
+`ai-backend/` also contains a FastAPI + Ollama deployment for a future always-on VPS setup. The GitHub Pages frontend currently uses browser inference and does not call that backend.
