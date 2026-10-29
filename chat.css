@@ -1,6 +1,6 @@
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .chat-launcher{position:fixed;right:26px;bottom:24px;z-index:80;display:flex;align-items:center;gap:10px;border:1px solid var(--scan);border-radius:999px;padding:13px 19px;background:var(--scan);color:var(--ink);font:500 13px 'IBM Plex Mono',monospace;box-shadow:0 10px 32px #0006;cursor:pointer;transition:transform .2s,background .2s}
-.chat-launcher:hover{transform:translateY(-2px);background:#63cabb}.chat-launcher span:first-child{font-size:18px}
+.chat-launcher:hover{transform:translateY(-2px);background:#63cabb}.chat-launcher-icon{display:block;flex:none;width:23px;height:23px}
 .chat-panel{display:none;position:fixed;right:26px;bottom:88px;z-index:81;width:min(390px,calc(100vw - 28px));height:min(560px,calc(100dvh - 112px));padding:0;border:1px solid rgba(75,184,169,.35);border-radius:8px;background:var(--ink-2);box-shadow:0 18px 64px #0009;overflow:hidden;flex-direction:column}
 .chat-panel.is-open{display:flex}.chat-header{display:flex;align-items:center;justify-content:space-between;padding:17px 18px;border-bottom:1px solid var(--line);background:#10161d}
 .chat-header>div{display:flex;align-items:center;gap:11px}.chat-status-dot{width:9px;height:9px;border-radius:50%;background:var(--scan);box-shadow:0 0 10px var(--scan)}
