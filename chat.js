@@ -140,10 +140,10 @@
   }
 
   function directProfileAnswer(question) {
-    if (!/\b(tell me about|who is|describe|introduce)\b.{0,30}\b(tanvir|him|he)\b/iu.test(question)) return null;
+    if (!/\b(tell me (?:more )?about|who is|describe|introduce)\b.{0,35}\b(tanvir|him|he)\b/iu.test(question)) return null;
     return {
-      answer: 'Tanvir Ahmed is a Dhaka-based software engineer and PhD candidate with 5+ years of experience building production SaaS systems. He currently works at Automate IT Ltd. and holds a BSc in Computer Science and Engineering from East West University.',
-      sources: ['Profile', 'Current role — Software Engineer, Automate IT Ltd.', 'Education and ongoing learning']
+      answer: 'Tanvir Ahmed is a Dhaka-based software engineer and PhD candidate with 5+ years of experience building production SaaS products. He currently maintains a multi-tenant Education Management ERP at Automate IT Ltd. and previously led developers at Coder Charm Inc. His work includes document-verification and crowdshipping SaaS, courier workflows, inventory systems, and IoT vehicle tracking. His 2021 co-authored publication explored indoor wireless coverage optimization using machine-learning methods.',
+      sources: ['Profile', 'Current role — Software Engineer, Automate IT Ltd.', 'Software Engineer (Team Lead) — Coder Charm Inc.', 'Selected projects', 'Research and publication']
     };
   }
 
@@ -209,7 +209,7 @@
   }
 
   function preferredSections(question) {
-    if (/\b(tell me about|who is|describe|introduce)\b.{0,30}\b(tanvir|him|he)\b|\b(yourself|overview)\b/iu.test(question)) {
+    if (/\b(tell me (?:more )?about|who is|describe|introduce)\b.{0,35}\b(tanvir|him|he)\b|\b(yourself|overview)\b/iu.test(question)) {
       return ['Profile', 'Current role — Software Engineer, Automate IT Ltd.', 'Technical skills'];
     }
     if (/\b(language|languages|skill|skills|technology|technologies|tech stack)\b|ভাষা|দক্ষতা/iu.test(question)) return ['Technical skills'];
