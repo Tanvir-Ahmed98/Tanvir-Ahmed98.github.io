@@ -147,6 +147,15 @@
     };
   }
 
+  function directEducationAnswer(question) {
+    if (!/\b(education|degree|university|school|study|studied|graduated|coursework)\b|শিক্ষা|পড়াশোনা|বিশ্ববিদ্যালয়/iu.test(question)) return null;
+    if (/\b(cgpa|gpa|grade|grades|marks|score)\b/iu.test(question)) return null;
+    return {
+      answer: 'Tanvir completed a BSc in Computer Science and Engineering at East West University in Dhaka (2016–2020). His CV lists Data Structures and Algorithms, Database Systems, Software Engineering, Operating Systems, Computer Networks, Object-Oriented Programming, and Web Technologies among his relevant study areas.',
+      source: 'Education and ongoing learning'
+    };
+  }
+
   function directResearchAnswer(question, chunks) {
     if (!/\b(model|method|algorithm|classifier|approach)\b|মডেল|পদ্ধতি/iu.test(question)) return null;
     const research = chunks.find(chunk => chunk.section === 'Research and publication')?.text || '';
@@ -291,6 +300,13 @@
         pending.remove();
         addMessage(profileAnswer.answer, 'assistant', profileAnswer.sources);
         history.push({ role: 'user', content: question }, { role: 'assistant', content: profileAnswer.answer });
+        return;
+      }
+      const educationAnswer = directEducationAnswer(question);
+      if (educationAnswer) {
+        pending.remove();
+        addMessage(educationAnswer.answer, 'assistant', [educationAnswer.source]);
+        history.push({ role: 'user', content: question }, { role: 'assistant', content: educationAnswer.answer });
         return;
       }
       const languageAnswer = directLanguageAnswer(question, knowledge);
