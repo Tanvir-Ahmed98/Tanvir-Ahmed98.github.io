@@ -114,6 +114,15 @@
     };
   }
 
+  function directPythonAnswer(question) {
+    const asksAboutExperience = /\b(experience|experienced|year|years|long|know|knows|skill|skills|used|use|using|worked|work|done|built|project)\b/iu.test(question);
+    if (!/\bpython\b/iu.test(question) || !asksAboutExperience) return null;
+    return {
+      answer: "Tanvir's CV lists Python as a language and mentions Python automation, MCP automation, and AI workflow automation. It reports 5+ years of overall software engineering experience, but does not give a Python-specific duration or name a particular Python-built project.",
+      sources: ['Technical skills', 'Python experience detail']
+    };
+  }
+
   function directProfileAnswer(question) {
     if (!/\b(tell me about|who is|describe|introduce)\b.{0,30}\b(tanvir|him|he)\b/iu.test(question)) return null;
     return {
@@ -266,6 +275,13 @@
         pending.remove();
         addMessage(languageAnswer.answer, 'assistant', [languageAnswer.source]);
         history.push({ role: 'user', content: question }, { role: 'assistant', content: languageAnswer.answer });
+        return;
+      }
+      const pythonAnswer = directPythonAnswer(question);
+      if (pythonAnswer) {
+        pending.remove();
+        addMessage(pythonAnswer.answer, 'assistant', pythonAnswer.sources);
+        history.push({ role: 'user', content: question }, { role: 'assistant', content: pythonAnswer.answer });
         return;
       }
       const researchAnswer = directResearchAnswer(question, sources);

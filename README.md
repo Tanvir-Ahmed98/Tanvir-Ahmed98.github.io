@@ -2,6 +2,8 @@
 
 Static portfolio site with a private, browser-based AI assistant. The primary GitHub Pages setup does not need a VPS, FastAPI server, API key, or third-party LLM API.
 
+The site includes a CV section with the resume PDF at `assets/Tanvir_Ahmed_Resume.pdf`. Python-related answers distinguish the CV's 5+ years of overall software engineering experience from any Python-specific duration, which the CV does not state.
+
 ## Ask Tanvir AI
 
 The chat runs RAG in the visitor's browser:

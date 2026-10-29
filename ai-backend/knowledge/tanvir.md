@@ -38,6 +38,9 @@ The portfolio describes research interests in computer vision, machine learning,
 - Cloud and DevOps: AWS fundamentals (EC2, IAM, S3), Docker/containerization, Terraform concepts, Kubernetes basics, CI/CD familiarity.
 - Engineering: Git, code review, Agile/Scrum, architecture discussions, cross-team collaboration, team leadership, mentoring.
 
+## Python experience detail
+The CV lists Python as a language and mentions Python automation, MCP (Model Context Protocol) automation, and AI workflow automation. It states more than five years of overall software engineering experience, but does not specify how many years Tanvir has used Python specifically and does not name a particular project as Python-built. Do not turn the overall career duration into Python-specific experience.
+
 ## Education and ongoing learning
 BSc in Computer Science and Engineering, East West University, Dhaka, 2016–2020. Tanvir is actively building hands-on knowledge in AWS, Docker, Terraform, Kubernetes, cloud infrastructure, and Infrastructure-as-Code, and continues learning modern frontend and performance practices.
 
