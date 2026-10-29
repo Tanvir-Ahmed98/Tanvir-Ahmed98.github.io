@@ -1,0 +1,54 @@
+services:
+  ollama:
+    image: ollama/ollama:latest
+    restart: unless-stopped
+    volumes:
+      - ollama_data:/root/.ollama
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
+  models:
+    image: ollama/ollama:latest
+    depends_on:
+      ollama:
+        condition: service_healthy
+    entrypoint: ["/bin/sh", "-c"]
+    command: ["ollama pull ${CHAT_MODEL:-qwen2.5:3b} && ollama pull ${EMBED_MODEL:-nomic-embed-text}"]
+    environment:
+      OLLAMA_HOST: http://ollama:11434
+    restart: "no"
+
+  api:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      models:
+        condition: service_completed_successfully
+    environment:
+      OLLAMA_URL: http://ollama:11434
+      CHAT_MODEL: ${CHAT_MODEL:-qwen2.5:3b}
+      EMBED_MODEL: ${EMBED_MODEL:-nomic-embed-text}
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-https://tanvir-ahmed98.github.io}
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    depends_on:
+      - api
+    environment:
+      API_DOMAIN: ${API_DOMAIN:?Set API_DOMAIN in ai-backend/.env to a domain you control}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  ollama_data:
+  caddy_data:
+  caddy_config:
