@@ -155,6 +155,39 @@
     };
   }
 
+  function directPersonalAnswer(question) {
+    const normalized = question.toLocaleLowerCase();
+    const source = 'Personal profile shared by Tanvir';
+    if (/\b(age|old|birth|born|date of birth|dob)\b|বয়স|বয়স|জন্ম/iu.test(normalized)) {
+      if (/\b(birth|born|date of birth|dob)\b|জন্ম/iu.test(normalized)) {
+        return { answer: 'Tanvir was born on 21 February 1998.', source };
+      }
+      const now = new Date();
+      let age = now.getFullYear() - 1998;
+      if (now.getMonth() < 1 || (now.getMonth() === 1 && now.getDate() < 21)) age -= 1;
+      return { answer: `Tanvir is ${age} years old as of today.`, source };
+    }
+    if (/\b(spouse|wife|husband|married)\b|স্ত্রী|স্বামী/iu.test(normalized)) {
+      return { answer: 'Tanvir’s spouse is Abony Hossain Trina.', source };
+    }
+    if (/\b(father|dad)\b|বাবা|পিতা/iu.test(normalized)) {
+      return { answer: 'Tanvir’s father is Md. Abdus Salam.', source };
+    }
+    if (/\b(mother|mom)\b|মা|মাতা/iu.test(normalized)) {
+      return { answer: 'Tanvir’s mother is Mst Aiysha Khatun.', source };
+    }
+    if (/\b(sister[- ]in[- ]law)\b/iu.test(normalized)) {
+      return { answer: 'Tanvir’s sister-in-law is Nabonita Nira.', source };
+    }
+    if (/\b(brother|brothers|siblings)\b|ভাই|ভাইবোন/iu.test(normalized)) {
+      return { answer: 'Tanvir’s brothers are Mahade Ibn Salam and Raief Ahmed.', source };
+    }
+    if (/\b(family|relatives)\b|পরিবার/iu.test(normalized)) {
+      return { answer: 'Tanvir’s spouse is Abony Hossain Trina. His father is Md. Abdus Salam, his mother is Mst Aiysha Khatun, his brothers are Mahade Ibn Salam and Raief Ahmed, and his sister-in-law is Nabonita Nira.', source };
+    }
+    return null;
+  }
+
   function directStrengthAnswer(question) {
     if (!/\b(character|personality|trait|traits|strength|strengths)\b/iu.test(question)) return null;
     return {
@@ -294,6 +327,13 @@
         pending.remove();
         addMessage(smallTalkAnswer, 'assistant');
         history.push({ role: 'user', content: question }, { role: 'assistant', content: smallTalkAnswer });
+        return;
+      }
+      const personalAnswer = directPersonalAnswer(question);
+      if (personalAnswer) {
+        pending.remove();
+        addMessage(personalAnswer.answer, 'assistant', [personalAnswer.source]);
+        history.push({ role: 'user', content: question }, { role: 'assistant', content: personalAnswer.answer });
         return;
       }
       const priorUserQuestion = isFollowUp(question)

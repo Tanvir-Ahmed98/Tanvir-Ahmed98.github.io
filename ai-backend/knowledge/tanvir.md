@@ -56,3 +56,12 @@ Email: tanvir.rafee405@gmail.com. Location: Dhaka, Bangladesh. Portfolio: tanvir
 
 ## Professional strengths detail
 When asked about character traits, explain that the CV does not contain a personality-test result. It does provide evidence of leadership, mentoring, collaboration, planning, communication, systematic debugging, and production ownership through Tanvir’s documented engineering work.
+
+## Personal profile shared by Tanvir
+- Date of birth: 21 February 1998. Calculate current age from this date and today; do not store a fixed age.
+- Spouse: Abony Hossain Trina.
+- Father: Md. Abdus Salam.
+- Mother: Mst Aiysha Khatun.
+- Brothers: Mahade Ibn Salam and Raief Ahmed.
+- Sister-in-law: Nabonita Nira.
+Only provide these family details when specifically asked about the relevant person or Tanvir’s family; do not include them in a general introduction.
