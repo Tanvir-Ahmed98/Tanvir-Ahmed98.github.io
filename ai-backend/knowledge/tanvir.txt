@@ -17,10 +17,11 @@ Nov 2021–Mar 2022. Built foundational PHP and MySQL CRUD applications and REST
 
 ## Selected projects
 - UZO Sign — multi-tenant document verification SaaS; React.js, TypeScript, REST APIs. Includes role-based access, tenant data isolation, reusable form/document/status components, and dashboard performance work.
-- Dimhum — crowdshipping SaaS platform; dimhum.com; React.js, TypeScript, Vue.js, Nuxt.js. Supports sender, receiver, and traveller workflows, transactions, shipment tracking, order and payment-related flows, and administrative dashboards.
-- Education Management ERP — app.academyims.com; Vue.js, Nuxt.js, PrimeVue, PrimeReact. Delivered 7+ core modules, including fees, attendance, admissions, leave management, and ID card layout design, with server-side filtering, pagination, and sorting.
-- Courier Service Platform — xpressintown.com; React.js and Pathao API integration for shipment creation, label generation, tracking, booking, and dispatch.
-- Vehicle Tracking System — IoT-based operational dashboards; raw PHP, MySQL, Debian Linux.
+- uSigning — live electronic-signature SaaS project; public site: https://usigning.com/.
+- Dimhum — crowdshipping SaaS platform; public site: https://dimhum.com; React.js, TypeScript, Vue.js, Nuxt.js. Supports sender, receiver, and traveller workflows, transactions, shipment tracking, order and payment-related flows, and administrative dashboards.
+- Education Management ERP — public portal: https://app.academyims.com; Vue.js, Nuxt.js, PrimeVue, PrimeReact. Delivered 7+ core modules, including fees, attendance, admissions, leave management, and ID card layout design, with server-side filtering, pagination, and sorting.
+- Courier Service Platform — public site: https://xpressintown.com; React.js and Pathao API integration for shipment creation, label generation, tracking, booking, and dispatch.
+- Vehicle Tracking System — IoT-based operational dashboards; public product site: https://tmvbd.com; raw PHP, MySQL, Debian Linux.
 - Stock Management System — inventory CRUD, tables, filters, and pagination; raw PHP, MySQL, Debian Linux.
 
 ## Research and publication
@@ -56,7 +57,6 @@ Email: tanvir.rafee405@gmail.com. Location: Dhaka, Bangladesh. Portfolio: tanvir
 
 ## Professional strengths detail
 When asked about character traits, explain that the CV does not contain a personality-test result. It does provide evidence of leadership, mentoring, collaboration, planning, communication, systematic debugging, and production ownership through Tanvir’s documented engineering work.
-
 ## Personal profile shared by Tanvir
 - Date of birth: 21 February 1998. Calculate current age from this date and today; do not store a fixed age.
 - Spouse: Abony Hossain Trina.
@@ -65,3 +65,13 @@ When asked about character traits, explain that the CV does not contain a person
 - Brothers: Mahade Ibn Salam and Raief Ahmed.
 - Sister-in-law: Nabonita Nira.
 Only provide these family details when specifically asked about the relevant person or Tanvir’s family; do not include them in a general introduction.
+
+
+## Live project links
+Public project links Tanvir supplied or already listed in his portfolio:
+- Education Management ERP (Automate IT Ltd.): https://app.academyims.com/
+- Dimhum crowdshipping platform: https://dimhum.com/
+- uSigning e-signature SaaS: https://usigning.com/
+- Track My Vehicle Bangladesh / vehicle tracking (Bondstein): https://tmvbd.com/
+- Courier Service Platform: https://xpressintown.com/
+Bondstein Stock Management System is also a documented project, but no public URL is listed. Never include login names, passwords, access tokens, or private credentials in answers or public files. The app.academyims.com account credentials are intentionally not part of portfolio knowledge.

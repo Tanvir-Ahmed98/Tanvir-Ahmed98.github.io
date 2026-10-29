@@ -27,7 +27,23 @@
     const item = document.createElement('article');
     item.className = `chat-message ${kind}`;
     const paragraph = document.createElement('p');
-    paragraph.textContent = text;
+    paragraph.style.whiteSpace = 'pre-line';
+    const urlPattern = /https?:\/\/[^\s)]+/g;
+    let cursor = 0;
+    for (const match of text.matchAll(urlPattern)) {
+      const rawUrl = match[0];
+      const url = rawUrl.replace(/[.,;!?]+$/, '');
+      paragraph.appendChild(document.createTextNode(text.slice(cursor, match.index)));
+      const link = document.createElement('a');
+      link.href = url;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.textContent = url;
+      paragraph.appendChild(link);
+      paragraph.appendChild(document.createTextNode(rawUrl.slice(url.length)));
+      cursor = match.index + rawUrl.length;
+    }
+    paragraph.appendChild(document.createTextNode(text.slice(cursor)));
     item.appendChild(paragraph);
     if (sourceNames.length) {
       const source = document.createElement('small');
@@ -152,6 +168,15 @@
     return {
       answer: 'Tanvir completed a BSc in Computer Science and Engineering at East West University, Dhaka (2016–2020), and reports a CGPA of 2.48 with 73% marks. He completed HSC at Rajarbag Police Lines School & College (GPA 4.42) and SSC at Ideal School and College (GPA 5.00). He identifies as a PhD candidate; his institution and research discipline have not been provided.',
       source: 'Education and ongoing learning'
+    };
+  }
+
+  function directLiveProjectsAnswer(question) {
+    const asksForLiveProjects = /\b(live|online|website|websites|url|urls|links|deployed)\b.{0,45}\b(project|projects|work)\b|\b(show me|list all)\b.{0,45}\b(project|projects)\b.{0,35}\b(live|online|website|url|link)\b/iu.test(question);
+    if (!asksForLiveProjects) return null;
+    return {
+      answer: 'Live project links in Tanvir’s portfolio:\n• Education Management ERP (Automate IT Ltd.): https://app.academyims.com/\n• Dimhum crowdshipping platform: https://dimhum.com/\n• uSigning e-signature SaaS: https://usigning.com/\n• Track My Vehicle Bangladesh / vehicle tracking (Bondstein): https://tmvbd.com/\n• Courier Service Platform: https://xpressintown.com/\nBondstein’s Stock Management System is also documented, but no public URL is listed. Login credentials are not included.',
+      source: 'Live project links'
     };
   }
 
@@ -327,6 +352,13 @@
         pending.remove();
         addMessage(smallTalkAnswer, 'assistant');
         history.push({ role: 'user', content: question }, { role: 'assistant', content: smallTalkAnswer });
+        return;
+      }
+      const liveProjectsAnswer = directLiveProjectsAnswer(question);
+      if (liveProjectsAnswer) {
+        pending.remove();
+        addMessage(liveProjectsAnswer.answer, 'assistant', [liveProjectsAnswer.source]);
+        history.push({ role: 'user', content: question }, { role: 'assistant', content: liveProjectsAnswer.answer });
         return;
       }
       const personalAnswer = directPersonalAnswer(question);
