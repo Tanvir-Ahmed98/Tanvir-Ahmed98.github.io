@@ -101,6 +101,22 @@
     return 'Tanvir’s CV and portfolio do not mention this, so I can’t confirm it from the available information.';
   }
 
+  function directSmallTalkAnswer(question) {
+    const normalized = question.toLocaleLowerCase().trim().replace(/[.!?]+$/g, '');
+    const aboutAssistant = "I'm Tanvir's portfolio assistant. Ask me about his experience, projects, skills, education, or research.";
+    if (/^(how are you|how's it going|how do you do|what's up)$/.test(normalized)) {
+      return `I'm doing well, thanks for asking! ${aboutAssistant}`;
+    }
+    if (/^(hi|hello|hey|good morning|good afternoon|good evening)\b/.test(normalized)) {
+      return `Hi! ${aboutAssistant}`;
+    }
+    if (/^(thanks|thank you|thx)\b/.test(normalized)) return "You're welcome! Let me know what you'd like to know about Tanvir.";
+    if (/কেমন আছ|কেমন আছেন|kemon acho|kemon aso/iu.test(normalized)) {
+      return `আমি ভালো আছি, ধন্যবাদ! ${aboutAssistant}`;
+    }
+    return '';
+  }
+
   function directLanguageAnswer(question, chunks) {
     const normalized = question.toLocaleLowerCase().replace(/\blanugages\b/g, 'languages');
     const asksForLanguages = /\b(what|which|list|all)\b.{0,45}\b(programming\s+)?languages?\b|\b(programming\s+)?languages?\b.{0,35}\b(know|knows|use|uses|speak|speaks)\b|কোন কোন ভাষা|কী কী ভাষা/iu.test(normalized);
@@ -257,6 +273,13 @@
     submit.disabled = true;
     const pending = addMessage('Starting local AI…', 'assistant pending');
     try {
+      const smallTalkAnswer = directSmallTalkAnswer(question);
+      if (smallTalkAnswer) {
+        pending.remove();
+        addMessage(smallTalkAnswer, 'assistant');
+        history.push({ role: 'user', content: question }, { role: 'assistant', content: smallTalkAnswer });
+        return;
+      }
       const priorUserQuestion = isFollowUp(question)
         ? history.filter(item => item.role === 'user').slice(-1)[0]?.content || ''
         : '';
