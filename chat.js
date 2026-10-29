@@ -28,16 +28,18 @@
     item.className = `chat-message ${kind}`;
     const paragraph = document.createElement('p');
     paragraph.style.whiteSpace = 'pre-line';
-    const urlPattern = /https?:\/\/[^\s)]+/g;
+    const urlPattern = /https?:\/\/[^\s)]+|[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}/g;
     let cursor = 0;
     for (const match of text.matchAll(urlPattern)) {
       const rawUrl = match[0];
       const url = rawUrl.replace(/[.,;!?]+$/, '');
       paragraph.appendChild(document.createTextNode(text.slice(cursor, match.index)));
       const link = document.createElement('a');
-      link.href = url;
-      link.target = '_blank';
-      link.rel = 'noopener noreferrer';
+      link.href = url.includes('@') ? `mailto:${url}` : url;
+      if (!url.includes('@')) {
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+      }
       link.textContent = url;
       paragraph.appendChild(link);
       paragraph.appendChild(document.createTextNode(rawUrl.slice(url.length)));
@@ -168,6 +170,22 @@
     return {
       answer: 'Tanvir completed a BSc in Computer Science and Engineering at East West University, Dhaka (2016–2020), and reports a CGPA of 2.48 with 73% marks. He completed HSC at Rajarbag Police Lines School & College (GPA 4.42) and SSC at Ideal School and College (GPA 5.00). He identifies as a PhD candidate; his institution and research discipline have not been provided.',
       source: 'Education and ongoing learning'
+    };
+  }
+
+  function directAvailabilityAnswer(question) {
+    if (!/\b(available|availability|free|schedule)\b/iu.test(question)) return null;
+    return {
+      answer: 'Tanvir is available Saturday through Thursday, 7:00 PM–1:00 AM Bangladesh Time (BDT). This is an overnight window. For inquiries or to arrange a conversation, email tanvir.rafee405@gmail.com.',
+      source: 'Availability and contact'
+    };
+  }
+
+  function directContactAnswer(question) {
+    if (!/\b(email|e-mail|contact|get in touch)\b/iu.test(question)) return null;
+    return {
+      answer: 'You can email Tanvir at tanvir.rafee405@gmail.com.',
+      source: 'Contact and public links'
     };
   }
 
@@ -352,6 +370,20 @@
         pending.remove();
         addMessage(smallTalkAnswer, 'assistant');
         history.push({ role: 'user', content: question }, { role: 'assistant', content: smallTalkAnswer });
+        return;
+      }
+      const availabilityAnswer = directAvailabilityAnswer(question);
+      if (availabilityAnswer) {
+        pending.remove();
+        addMessage(availabilityAnswer.answer, 'assistant', [availabilityAnswer.source]);
+        history.push({ role: 'user', content: question }, { role: 'assistant', content: availabilityAnswer.answer });
+        return;
+      }
+      const contactAnswer = directContactAnswer(question);
+      if (contactAnswer) {
+        pending.remove();
+        addMessage(contactAnswer.answer, 'assistant', [contactAnswer.source]);
+        history.push({ role: 'user', content: question }, { role: 'assistant', content: contactAnswer.answer });
         return;
       }
       const liveProjectsAnswer = directLiveProjectsAnswer(question);

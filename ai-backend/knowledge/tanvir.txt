@@ -52,6 +52,9 @@ Tanvir is actively building hands-on knowledge in AWS, Docker, Terraform, Kubern
 ## Professional strengths evidenced by work
 The CV documents team leadership and mentoring, cross-team collaboration, sprint planning, code review, client and product stakeholder communication, release coordination, systematic debugging, and ownership of production SaaS systems. Describe these as demonstrated professional strengths, not as results from a personality test or unsupported personal character traits.
 
+## Availability and contact
+Tanvir is available Saturday through Thursday from 7:00 PM to 1:00 AM Bangladesh Time (BDT). This overnight window runs from evening into the following day. For inquiries or to arrange a conversation, email tanvir.rafee405@gmail.com.
+
 ## Contact and public links
 Email: tanvir.rafee405@gmail.com. Location: Dhaka, Bangladesh. Portfolio: tanvir-ahmed98.github.io. GitHub: github.com/Tanvir-Ahmed98.
 
