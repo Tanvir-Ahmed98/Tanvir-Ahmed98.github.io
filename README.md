@@ -1,20 +1,12 @@
 # Tanvir Ahmed portfolio
 
-Static portfolio site with a private, browser-based AI assistant. The primary GitHub Pages setup does not need a VPS, FastAPI server, API key, or third-party LLM API.
+Static portfolio site with a Gemini-powered portfolio assistant.
 
 The site includes a CV section with the resume PDF at `assets/Tanvir_Ahmed_Resume.pdf`. Python-related answers distinguish the CV's 5+ years of overall software engineering experience from any Python-specific duration, which the CV does not state.
 
 ## Ask Tanvir AI
 
-The chat runs RAG in the visitor's browser:
-
-1. It downloads the Qwen3-0.6B WebLLM model on the visitor's first question and caches model files in the browser.
-2. It retrieves relevant passages from `ai-backend/knowledge/tanvir.txt` with local BM25 scoring.
-3. It sends the selected passages and question to the local WebGPU model. The question and retrieved CV text stay in the browser.
-
-WebLLM JavaScript is loaded from `esm.run`, while model files are downloaded from Hugging Face. Those are runtime/model file downloads, not LLM API calls. The model is approximately 352 MB; the first download may take a few minutes and later visits can reuse the browser cache. A WebGPU-capable desktop browser is required. If WebGPU is unavailable or the device does not have enough GPU memory, the chat reports that instead of calling a remote model.
-
-The CV knowledge source is `ai-backend/knowledge/tanvir.txt`. Update it when the resume or portfolio changes. Retrieval is lexical BM25 with English, Bangla, and Banglish query aliases; answer quality depends on the compact local model and relevant retrieved passages.
+The chat retrieves relevant passages from `ai-backend/knowledge/tanvir.txt` (BM25, in the browser) and sends them with the question to a Cloudflare Worker (`gemini-proxy/`), which calls Gemini. The Gemini API key lives only as a Worker secret (`wrangler secret put GEMINI_API_KEY`); it is never in this repo. The Worker only accepts requests from the site origin and is pinned to a US region because Gemini rejects some Cloudflare edge locations. Deploy with `cd gemini-proxy && npx wrangler deploy`.
 
 ## Run locally
 

@@ -1,3 +1,6 @@
 name = "tanvir-gemini-proxy"
 main = "worker.js"
 compatibility_date = "2025-01-01"
+
+[placement]
+region = "gcp:us-east4"
