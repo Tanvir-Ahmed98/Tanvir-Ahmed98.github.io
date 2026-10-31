@@ -27,7 +27,7 @@ export default {
     let payload;
     try { payload = await request.json(); } catch { return json({ error: 'Invalid request' }, 400, origin); }
     const question = String(payload.question || '').slice(0, 1000);
-    const context = String(payload.context || '').slice(0, 6000);
+    const context = String(payload.context || '').slice(0, 20000);
     if (!question.trim()) return json({ error: 'Empty question' }, 400, origin);
 
     const history = (Array.isArray(payload.history) ? payload.history : []).slice(-6).map(item => ({

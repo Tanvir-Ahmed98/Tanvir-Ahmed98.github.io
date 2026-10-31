@@ -410,9 +410,7 @@
         history.push({ role: 'user', content: question }, { role: 'assistant', content: researchAnswer.answer });
         return;
       }
-      const context = sources.length
-        ? sources.map(item => `[${item.section}]\n${item.text}`).join('\n\n')
-        : 'No relevant CV or portfolio information was found for this question.';
+      const context = knowledge.map(item => `[${item.section}]\n${item.text}`).join('\n\n');
       pending.querySelector('p').textContent = 'Thinking…';
       const reply = (await askGemini(question, context)).trim();
       pending.remove();
