@@ -1,4 +1,7 @@
 (() => {
+  // URL of the deployed Cloudflare Worker in gemini-proxy/ (holds the Gemini API key server-side).
+  // Leave empty to fall back to the on-device WebLLM model.
+  const GEMINI_PROXY_URL = '';
   const MODEL_ID = 'Qwen3-0.6B-q4f16_1-MLC';
   const MODEL_PACKAGE = 'https://esm.run/@mlc-ai/web-llm@0.2.86';
   const KNOWLEDGE_URL = new URL('./ai-backend/knowledge/tanvir.txt', document.baseURI);
@@ -322,6 +325,17 @@
     return candidates[0]?.score ? candidates.slice(0, 4) : [];
   }
 
+  async function askGemini(question, context) {
+    const response = await fetch(GEMINI_PROXY_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ question, context, history: history.slice(-6) })
+    });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok || !data.answer) throw new Error(data.error || 'The AI service did not return an answer. Please try again.');
+    return data.answer;
+  }
+
   async function loadModel() {
     if (engine) return engine;
     if (modelPromise) return modelPromise;
@@ -352,6 +366,11 @@
   close.addEventListener('click', () => { setOpen(false); launcher.focus(); });
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape' && panel.classList.contains('is-open')) { setOpen(false); launcher.focus(); }
+  });
+  input.addEventListener('keydown', event => {
+    if (event.key !== 'Enter' || event.shiftKey || event.isComposing) return;
+    event.preventDefault();
+    form.requestSubmit();
   });
   input.addEventListener('input', () => { input.style.height = 'auto'; input.style.height = `${Math.min(input.scrollHeight, 110)}px`; });
 
@@ -473,6 +492,14 @@
       const context = sources.length
         ? sources.map(item => `[${item.section}]\n${item.text}`).join('\n\n')
         : 'No relevant CV or portfolio information was found for this question.';
+      if (GEMINI_PROXY_URL) {
+        pending.querySelector('p').textContent = 'Thinking…';
+        const reply = (await askGemini(question, context)).trim();
+        pending.remove();
+        addMessage(reply, 'assistant', [...new Set(sources.map(item => item.section))]);
+        history.push({ role: 'user', content: question }, { role: 'assistant', content: reply });
+        return;
+      }
       const localEngine = await loadModel();
       pending.querySelector('p').textContent = 'Generating on this device…';
       const messagesForModel = [
