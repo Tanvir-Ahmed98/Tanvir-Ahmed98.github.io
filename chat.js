@@ -91,24 +91,6 @@
     return tokenize(expanded);
   }
 
-  function getSkillTopic(question) {
-    if (!/\b(experience|experienced|know|knows|skill|skills|proficien|familiar|worked|work|using|use|developer)\b|অভিজ্ঞতা|দক্ষ|জানে|কাজ করেছে/iu.test(question)) return '';
-    const topic = question.replace(/\blanugages\b/giu, 'languages')
-      .replace(/\b(?:what|which|list|all|programming|languages?|does|do|did|is|are|was|were|has|have|had|tanvir|he|him|his|she|her|they|them|any|ever|the|a|an|with|in|on|at|of|for|about|experience|experienced|exp|know|knows|skill|skills|proficient|proficiency|familiar|worked|work|using|use|developer|developer's|can|could|you|tell|me|whether|if)\b/giu, ' ')
-      .replace(/[?.,!]/g, ' ')
-      .replace(/\s+/g, ' ')
-      .trim();
-    return topic ? topic[0].toLocaleUpperCase() + topic.slice(1) : '';
-  }
-
-  function missingAnswer(question, topic) {
-    const bangla = /[\u0980-\u09FF]/u.test(question);
-    if (topic && bangla) return `Tanvir-এর CV ও portfolio-তে ${topic} নিয়ে experience উল্লেখ নেই; তাই উপলভ্য তথ্য অনুযায়ী তাঁর ${topic}-এ documented experience নেই।`;
-    if (topic) return `Tanvir's CV and portfolio do not list experience with ${topic}; based on the available information, he has no documented experience with ${topic}.`;
-    if (bangla) return 'এই তথ্য Tanvir-এর CV বা portfolio-তে উল্লেখ নেই, তাই উপলভ্য তথ্য থেকে এটি নিশ্চিত করা যাচ্ছে না।';
-    return 'Tanvir’s CV and portfolio do not mention this, so I can’t confirm it from the available information.';
-  }
-
   function directSmallTalkAnswer(question) {
     const normalized = question.toLocaleLowerCase().trim().replace(/[.!?]+$/g, '');
     const aboutAssistant = "I'm Tanvir's portfolio assistant. Ask me about his experience, projects, skills, education, or research.";
@@ -426,28 +408,6 @@
         pending.remove();
         addMessage(researchAnswer.answer, 'assistant', [researchAnswer.source]);
         history.push({ role: 'user', content: question }, { role: 'assistant', content: researchAnswer.answer });
-        return;
-      }
-      const skillTopic = getSkillTopic(question);
-      const knownTerms = new Set(knowledge.flatMap(item => [...item.terms.keys()]));
-      const topicTerms = tokenize(skillTopic);
-      const topicMissing = skillTopic && topicTerms.some(term => !knownTerms.has(term));
-      const technicalTerms = new Set(knowledge
-        .filter(item => item.section === 'Technical skills')
-        .flatMap(item => [...item.terms.keys()]));
-      const topicKnown = skillTopic && topicTerms.length && topicTerms.every(term => technicalTerms.has(term));
-      if (topicMissing || (!sources.length && !topicKnown)) {
-        const answer = missingAnswer(question, skillTopic);
-        pending.remove();
-        addMessage(answer, 'assistant');
-        history.push({ role: 'user', content: question }, { role: 'assistant', content: answer });
-        return;
-      }
-      if (topicKnown) {
-        const answer = `Tanvir's CV lists ${skillTopic} among his technical skills.`;
-        pending.remove();
-        addMessage(answer, 'assistant', ['Technical skills']);
-        history.push({ role: 'user', content: question }, { role: 'assistant', content: answer });
         return;
       }
       const context = sources.length
